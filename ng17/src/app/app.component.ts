@@ -5,6 +5,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { ThemeService } from './services/theme-service.service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,14 @@ import { RippleModule } from 'primeng/ripple';
 })
 export class AppComponent implements OnInit {
   title = 'ng17';
+  themeSelection: boolean = false;
   constructor(
     private primengConfig: PrimeNGConfig,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private readonly themeService: ThemeService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.primengConfig.ripple = true;
 
     this.primengConfig.zIndex = {
@@ -32,10 +35,15 @@ export class AppComponent implements OnInit {
     this.translateService.setDefaultLang('en');
   }
 
-  translate(lang: string) {
+  translate(lang: string): void {
     this.translateService.use(lang);
     this.translateService
       .get('primeng')
       .subscribe((res: any) => this.primengConfig.setTranslation(res));
+  }
+
+  changeTheme(): void {
+    this.themeSelection = !this.themeSelection;
+    this.themeService.changeTheme(this.themeSelection ? 'dark' : 'light');
   }
 }
