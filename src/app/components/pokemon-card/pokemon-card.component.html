@@ -1,0 +1,21 @@
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      @if (pokemon) {
+        <h1>{{ pokemon.pokemonSpecieResult.name }}</h1>
+        <img
+          [src]="
+            pokemon.pokemonResult.sprites.other?.['official-artwork']
+              ?.front_default
+          "
+          alt="pokemon"
+        />
+      }
+    </div>
+    <div class="flip-card-back">
+      <h1>John Doe</h1>
+      <p>Architect & Engineer</p>
+      <p>We love that guy</p>
+    </div>
+  </div>
+</div>
