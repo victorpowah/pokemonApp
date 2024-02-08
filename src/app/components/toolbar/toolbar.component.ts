@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button'
 import { ThemeService } from '../../services/theme-service.service'
 
 @Component({
-  selector: 'toolbar',
+  selector: 'app-toolbar',
   standalone: true,
   imports: [ToolbarModule, AvatarModule, ButtonModule],
   templateUrl: './toolbar.component.html',

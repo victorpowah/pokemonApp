@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PokeApiInfo } from '../../models/pokeApi-info.model';
-import { PokeApiResponse } from '../../models/pokeApi-response.model';
-import { PokeApiService } from '../../services/poke-api.service';
+import { Component, OnInit } from '@angular/core'
+import { PokeApiInfo } from '../../models/pokeApi-info.model'
+import { PokeApiResponse } from '../../models/pokeApi-response.model'
+import { PokeApiService } from '../../services/poke-api.service'
 
 @Component({
   selector: 'app-pokedex',
@@ -11,15 +11,15 @@ import { PokeApiService } from '../../services/poke-api.service';
   styleUrl: './pokedex.component.scss',
 })
 export class PokedexComponent implements OnInit {
-  types!: PokeApiInfo[];
+  types!: PokeApiInfo[]
 
-  selectedTypes!: PokeApiInfo[];
+  selectedTypes!: PokeApiInfo[]
 
   constructor(private readonly pokeApiService: PokeApiService) {}
 
   ngOnInit(): void {
     this.pokeApiService.getTypes().subscribe((types: PokeApiResponse) => {
-      this.types = types.results;
-    });
+      this.types = types.results
+    })
   }
 }
