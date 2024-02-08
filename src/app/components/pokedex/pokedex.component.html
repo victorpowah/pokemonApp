@@ -1,0 +1,22 @@
+<p-dropdown
+  [options]="pokedexs"
+  [(ngModel)]="selectedPokedexs"
+  (onChange)="changePokedex($event)"
+  optionLabel="name"
+  [showClear]="true"
+  [filter]="true"
+  filterBy="name"
+  placeholder="Select a City"
+></p-dropdown>
+
+<div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
+  @for (
+    pokemonEntry of selectedPokedex?.pokemon_entries | slice: 0 : 20;
+    track pokemonEntry.entry_number
+  ) {
+    <app-pokemon-card
+      class="flex w-15rem h-25rem align-items-center justify-content-center"
+      [pokemonUrl]="pokemonEntry.pokemon_species.url"
+    ></app-pokemon-card>
+  } @empty {}
+</div>
