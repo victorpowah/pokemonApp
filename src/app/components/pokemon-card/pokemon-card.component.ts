@@ -3,11 +3,12 @@ import { PokeApiService } from '../../services/poke-api.service'
 import { Subject, map, mergeMap, takeUntil } from 'rxjs'
 import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
 import { PokeApiPokemonResponse } from '../../models/pokeApi-pokemon-respose.model'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-pokemon-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.scss',
 })
