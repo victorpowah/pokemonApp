@@ -3,17 +3,20 @@ import { PokeApiService } from '../../services/poke-api.service'
 import { Subject, map, mergeMap, takeUntil } from 'rxjs'
 import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
 import { PokeApiPokemonResponse } from '../../models/pokeApi-pokemon-respose.model'
-import { CommonModule } from '@angular/common'
+import { CommonModule, DecimalPipe } from '@angular/common'
+import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 
 @Component({
   selector: 'app-pokemon-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DecimalPipe, ReplaceCommaPipe],
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.scss',
 })
 export class PokemonCardComponent implements OnInit, OnDestroy {
   _pokemonUrl: string = ''
+
+  public divide_factor = 10
 
   get pokemonUrl(): string {
     return this._pokemonUrl
