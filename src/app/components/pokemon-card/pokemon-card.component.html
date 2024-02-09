@@ -2,19 +2,22 @@
   <div class="flip-card-inner">
     @if (pokemon) {
       <div class="flip-card-front overflow-hidden">
-        <span
-          class="numberCircle bg-gray-800 border-round-3xl text-white m-1 p-1"
-        >
-          {{ pokemon.pokemonResult.id | number: '4.0-0' | replaceComma }}
-        </span>
-        <img
-          style="max-height: 70%"
-          [src]="
-            pokemon.pokemonResult.sprites.other?.['official-artwork']
-              ?.front_default
-          "
-          alt="pokemon"
-        />
+        <div style="height: 70%">
+          <span
+            class="numberCircle bg-gray-800 border-round-3xl text-white m-1 p-1"
+          >
+            {{ pokemon.pokemonResult.id | number: '4.0-0' | replaceComma }}
+          </span>
+          <img
+            class="h-14rem mt-5"
+            [src]="
+              pokemon.pokemonResult.sprites.other?.['official-artwork']
+                ?.front_default
+            "
+            alt="pokemon"
+          />
+        </div>
+
         <div class="bg-gray-300 h-full">
           <div class="flex justify-content-center flex-wrap gap-1">
             <div
@@ -37,7 +40,7 @@
                 </div>
               }
             </div>
-
+            <div class="break-flex"></div>
             <div
               class="flex align-items-center justify-content-center bg-gray-100 border-round h-2rem"
             >
@@ -68,7 +71,7 @@
       <div class="flip-card-back">
         <h1>{{ pokemon.pokemonSpecieResult.name | titlecase }}</h1>
         <span class="p-2">
-          {{ pokemon.pokemonSpecieResult.flavor_text_entries[0].flavor_text }}
+          {{ pokemonText }}
         </span>
         <div class="flex justify-content-center flex-wrap gap-2">
           @for (type of pokemon.pokemonResult.types; track $index) {
