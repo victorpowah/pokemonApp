@@ -28,6 +28,8 @@ export class PokemonCardComponent implements OnInit, OnDestroy {
     pokemonResult: PokeApiPokemonResponse
   }
 
+  public pokemonHP: number = 0
+
   private readonly pokeApiService = inject(PokeApiService)
 
   private destroy$ = new Subject<void>()
@@ -41,11 +43,17 @@ export class PokemonCardComponent implements OnInit, OnDestroy {
       .getPokemonSpecie(this.pokemonUrl)
       .pipe(
         takeUntil(this.destroy$),
-        mergeMap((pokemonSpecieResult) =>
+        mergeMap((pokemonSpecieResult: PokeApiPokemonSpecieResponse) =>
           this.pokeApiService
             .getPokemon(pokemonSpecieResult.varieties[0].pokemon.url)
             .pipe(
-              map((pokemonResult) => {
+              takeUntil(this.destroy$),
+              map((pokemonResult: PokeApiPokemonResponse) => {
+                const stat = pokemonResult.stats.find(
+                  (pokemon) => pokemon.stat.name === 'hp'
+                )
+                this.pokemonHP = stat ? stat.base_stat : 0
+
                 return { pokemonSpecieResult, pokemonResult }
               })
             )
