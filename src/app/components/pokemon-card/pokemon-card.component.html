@@ -1,21 +1,31 @@
 <div class="flip-card">
   <div class="flip-card-inner">
+
     <div class="flip-card-front">
       @if (pokemon) {
+        <img class="w-10"
+        [src]="
+          pokemon.pokemonResult.sprites.other?.['official-artwork']
+            ?.front_default
+        "
+        alt="pokemon"
+      />
         <h1>{{ pokemon.pokemonSpecieResult.name }}</h1>
-        <img
-          [src]="
-            pokemon.pokemonResult.sprites.other?.['official-artwork']
-              ?.front_default
-          "
-          alt="pokemon"
-        />
+        @for (type of pokemon.pokemonResult.types; track $index) {
+          <p>{{type.type.name}}</p>
+        }
       }
     </div>
+
+
+
     <div class="flip-card-back">
-      <h1>John Doe</h1>
-      <p>Architect & Engineer</p>
-      <p>We love that guy</p>
+      <h1>{{ pokemon.pokemonSpecieResult.name }}</h1>
+      <p>{{ pokemon.pokemonSpecieResult.flavor_text_entries[0].flavor_text}}</p>
+      @for (type of pokemon.pokemonResult.types; track $index) {
+        <p>{{type.type.name}}</p>
+      }
+     
     </div>
   </div>
 </div>
