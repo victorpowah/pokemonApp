@@ -1,8 +1,14 @@
-import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, Input, OnDestroy, inject } from '@angular/core'
 import { PokeApiService } from '../../services/poke-api.service'
 import { Subject, map, mergeMap, takeUntil } from 'rxjs'
-import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
-import { PokeApiPokemonResponse } from '../../models/pokeApi-pokemon-respose.model'
+import {
+  FlavorTextEntry,
+  PokeApiPokemonSpecieResponse,
+} from '../../models/pokeApi-pokemon-specie-response.model'
+import {
+  PokeApiPokemonResponse,
+  Stat,
+} from '../../models/pokeApi-pokemon-respose.model'
 import { CommonModule, DecimalPipe } from '@angular/common'
 import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 
@@ -13,7 +19,7 @@ import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.scss',
 })
-export class PokemonCardComponent implements OnInit, OnDestroy {
+export class PokemonCardComponent implements OnDestroy {
   _pokemonUrl: string = ''
 
   public divide_factor = 10
@@ -34,13 +40,11 @@ export class PokemonCardComponent implements OnInit, OnDestroy {
 
   public pokemonHP: number = 0
 
+  public pokemonText: string = ''
+
   private readonly pokeApiService = inject(PokeApiService)
 
   private destroy$ = new Subject<void>()
-
-  ngOnInit(): void {
-    this.getPokemon()
-  }
 
   private getPokemon(): void {
     this.pokeApiService
@@ -53,11 +57,7 @@ export class PokemonCardComponent implements OnInit, OnDestroy {
             .pipe(
               takeUntil(this.destroy$),
               map((pokemonResult: PokeApiPokemonResponse) => {
-                const stat = pokemonResult.stats.find(
-                  (pokemon) => pokemon.stat.name === 'hp'
-                )
-                this.pokemonHP = stat ? stat.base_stat : 0
-
+                this.calculatePokemonAttrs(pokemonResult, pokemonSpecieResult)
                 return { pokemonSpecieResult, pokemonResult }
               })
             )
@@ -71,6 +71,32 @@ export class PokemonCardComponent implements OnInit, OnDestroy {
           this.pokemon = pokemonSpecieResult
         }
       )
+  }
+
+  private calculatePokemonAttrs(
+    pokemonResult: PokeApiPokemonResponse,
+    pokemonSpecieResult: PokeApiPokemonSpecieResponse
+  ): void {
+    this.calculatePokemonHP(pokemonResult)
+    this.calculatePokemonText(pokemonSpecieResult)
+  }
+
+  private calculatePokemonHP(pokemonResult: PokeApiPokemonResponse): void {
+    const stat = pokemonResult.stats.find(
+      (pokemon: Stat) => pokemon.stat.name === 'hp'
+    )
+    this.pokemonHP = stat ? stat.base_stat : 0
+  }
+
+  private calculatePokemonText(
+    pokemonSpecieResult: PokeApiPokemonSpecieResponse
+  ): void {
+    const entry = pokemonSpecieResult.flavor_text_entries.find(
+      (entry: FlavorTextEntry) => entry.language.name == 'en'
+    )
+    this.pokemonText = entry
+      ? entry.flavor_text.replace('\n', '').replace('\f', '')
+      : ''
   }
 
   ngOnDestroy(): void {

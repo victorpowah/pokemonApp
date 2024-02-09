@@ -42,7 +42,10 @@ export class PokedexComponent implements OnInit, OnDestroy {
   }
 
   changePokedex(event: DropdownChangeEvent): void {
-    if (!event.value) return
+    if (!event.value) {
+      this.selectedPokedex = undefined
+      return
+    }
 
     this.pokeApiService
       .getPokedex(event.value.url)
