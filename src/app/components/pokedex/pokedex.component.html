@@ -1,13 +1,24 @@
-<p-dropdown
-  [options]="pokedexs"
-  [(ngModel)]="selectedPokedexs"
-  (onChange)="changePokedex($event)"
-  optionLabel="name"
-  [showClear]="true"
-  [filter]="true"
-  filterBy="name"
-  placeholder="Select a City"
-></p-dropdown>
+<div class="flex flex-column flex-wrap justify-content-center">
+  <div class="flex justify-content-center align-items-center">
+    <img
+      src="assets/images/pokedex_logo.webp"
+      alt="pokedex"
+      style="width: 40vw"
+    />
+  </div>
+
+  <p-dropdown
+    class="flex justify-content-center align-items-center"
+    [options]="pokedexs"
+    [(ngModel)]="selectedPokedexs"
+    (onChange)="changePokedex($event)"
+    optionLabel="name"
+    [showClear]="true"
+    [filter]="true"
+    filterBy="name"
+    placeholder="Select a City"
+  ></p-dropdown>
+</div>
 
 <div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
   @for (

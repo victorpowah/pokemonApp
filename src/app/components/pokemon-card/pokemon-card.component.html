@@ -1,15 +1,39 @@
 <div class="flip-card">
   <div class="flip-card-inner">
-    <div class="flip-card-front">
+    <div class="flip-card-front overflow-hidden">
       @if (pokemon) {
-        <h1>{{ pokemon.pokemonSpecieResult.name }}</h1>
         <img
+          class="max-w-full"
           [src]="
             pokemon.pokemonResult.sprites.other?.['official-artwork']
               ?.front_default
           "
           alt="pokemon"
         />
+        <div class="bg-bluegray-100 h-full">
+          <div class="flex flex-row flex-wrap gap-2 m-2">
+            <span class="flex align-items-start justify-content-start">
+              {{ pokemon.pokemonSpecieResult.name }}
+            </span>
+            <span class="flex align-items-start justify-content-start">{{
+              'HP:' + pokemonHP
+            }}</span>
+            <span class="flex align-items-start justify-content-start">{{
+              'height:' + pokemon.pokemonResult.height
+            }}</span>
+            <span class="flex align-items-start justify-content-start">{{
+              'weight:' + pokemon.pokemonResult.weight
+            }}</span>
+            @for (
+              pokemonType of pokemon.pokemonResult.types;
+              track pokemonType.type.name
+            ) {
+              <span class="flex align-items-start justify-content-start">{{
+                pokemonType.type.name
+              }}</span>
+            }
+          </div>
+        </div>
       }
     </div>
     <div class="flip-card-back">
