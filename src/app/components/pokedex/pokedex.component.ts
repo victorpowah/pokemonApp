@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { PokeApiPokedexResponse } from '../../models/pokeApi-pokedex-response.model'
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component'
-import { Subject,  mergeMap, takeUntil } from 'rxjs'
+import { Subject, map, mergeMap, takeUntil } from 'rxjs'
 
 @Component({
   selector: 'app-pokedex',
@@ -18,6 +18,7 @@ import { Subject,  mergeMap, takeUntil } from 'rxjs'
 })
 export class PokedexComponent implements OnInit, OnDestroy {
   selectedPokedex: PokeApiPokedexResponse | undefined
+  selectedPokedexDrop: PokeApiInfo | undefined
 
   pokedexs!: PokeApiInfo[]
 
@@ -29,18 +30,33 @@ export class PokedexComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.pokeApiService
-    .getPokedexs()
-    .pipe(
-      takeUntil(this.destroy$),
-      mergeMap((pokedexs: PokeApiResponse) => {
-        this.pokedexs = pokedexs.results;
-        return this.pokeApiService.getPokedex(this.pokedexs.length > 0 ? this.pokedexs[0].url : '');
-      }),
-      takeUntil(this.destroy$)
-    )
-    .subscribe((pokedex: PokeApiPokedexResponse) => {
-      this.selectedPokedex = { ...pokedex };
-    });
+      .getPokedexs()
+      .pipe(
+        takeUntil(this.destroy$),
+        mergeMap((pokedexs: PokeApiResponse) =>
+          this.pokeApiService
+            .getPokedex(
+              pokedexs.results.length > 0 ? pokedexs.results[0].url : ''
+            )
+            .pipe(
+              takeUntil(this.destroy$),
+              map((pokedex: PokeApiPokedexResponse) => {
+                return { pokedexs, pokedex }
+              })
+            )
+        ),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(
+        (pokedexResult: {
+          pokedexs: PokeApiResponse
+          pokedex: PokeApiPokedexResponse
+        }) => {
+          this.pokedexs = pokedexResult.pokedexs.results
+          this.selectedPokedex = { ...pokedexResult.pokedex }
+          this.selectedPokedexDrop = this.pokedexs[0]
+        }
+      )
   }
 
   ngOnDestroy() {
