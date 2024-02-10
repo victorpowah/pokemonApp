@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { PokeApiPokedexResponse } from '../../models/pokeApi-pokedex-response.model'
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component'
-import { Subject, takeUntil } from 'rxjs'
+import { Subject,  mergeMap, takeUntil } from 'rxjs'
 
 @Component({
   selector: 'app-pokedex',
@@ -29,11 +29,18 @@ export class PokedexComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.pokeApiService
-      .getPokedexs()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((pokedexs: PokeApiResponse) => {
-        this.pokedexs = pokedexs.results
-      })
+    .getPokedexs()
+    .pipe(
+      takeUntil(this.destroy$),
+      mergeMap((pokedexs: PokeApiResponse) => {
+        this.pokedexs = pokedexs.results;
+        return this.pokeApiService.getPokedex(this.pokedexs.length > 0 ? this.pokedexs[0].url : '');
+      }),
+      takeUntil(this.destroy$)
+    )
+    .subscribe((pokedex: PokeApiPokedexResponse) => {
+      this.selectedPokedex = { ...pokedex };
+    });
   }
 
   ngOnDestroy() {
