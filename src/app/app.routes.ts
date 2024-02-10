@@ -5,12 +5,19 @@ import { HomeComponent } from './components/home/home.component'
 export const routes: Routes = [
 
   {
+    path: '',
+    component: HomeComponent,
+   
+  },
+  {
     path: 'pokedex',
     component: PokedexComponent,
    
   },{
+   
     path: '**',
-    component: HomeComponent,
+    redirectTo: '',
+    pathMatch: 'full'
    
   }
 ]
