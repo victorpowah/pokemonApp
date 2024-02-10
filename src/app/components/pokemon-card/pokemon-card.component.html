@@ -1,71 +1,93 @@
-
-
 <div class="flip-card">
   <div class="flip-card-inner">
     @if (pokemon) {
-    <div class="flip-card-front overflow-hidden">
-     
-      <img
-        class="w-10"
-        [src]="
-           pokemon.pokemonResult.sprites.other?.['official-artwork']
-              ?.front_default
-          "
-        alt="pokemon"
-      />
-      <p
-        class="numberCircle flex align-items-center justify-content-center bg-gray-800 border-circle text-white mr-2"
-      >
-        {{ pokemon.pokemonResult.order }}
-      </p>
-      <div class="bg-gray-300 h-full">
-        <div class="flex justify-content-start flex-wrap gap-2">
-          <div class="flex align-items-center justify-content-center">
-            <h1 class="ml-2 text-2xl">{{ pokemon.pokemonSpecieResult.name | titlecase }}</h1> 
-            
-            
-          </div>
-          <div [class]="pokemon.pokemonResult.types[0].type.name + ' mt-4 mr-4 flex align-items-center justify-content-center mt-2 border-round-3xl px-2 h-2rem'">
-            <p class="text-sm text-white">
-              {{ pokemon.pokemonResult.types[0].type.name }}
-            </p>
-          </div>
-        
-          
-          <div class="flex align-items-center justify-content-center ml-2 bg-gray-100 border-round h-2rem">
-            <p class="border-round   px-2 text-xs">
-              HP: {{ pokemon.pokemonResult.stats[0].base_stat }}
-            </p>
-          </div>
-          <div class="flex align-items-center justify-content-center ml-2 bg-gray-100 border-round h-2rem">
-            <p class="border-round  px-2 text-xs">
-              Weight: {{ pokemon.pokemonResult.weight}} 
-            </p>
-          </div>
-          <div class="flex align-items-center justify-content-center ml-2 bg-gray-100 border-round h-2rem">
-            <p class="border-round  px-2 text-xs">
-              Height: {{ pokemon.pokemonResult.height}} 
-            </p>
+      <div class="flip-card-front overflow-hidden">
+        <div style="height: 70%">
+          <span
+            class="numberCircle bg-gray-800 border-round-3xl text-white m-1 p-1"
+          >
+            {{ pokemon.pokemonResult.id | number: '4.0-0' | replaceComma }}
+          </span>
+          <img
+            class="h-14rem mt-5"
+            [src]="
+              pokemon.pokemonResult.sprites.other?.['official-artwork']
+                ?.front_default
+            "
+            alt="pokemon"
+          />
+        </div>
+
+        <div class="bg-gray-300 h-full">
+          <div class="flex justify-content-center flex-wrap gap-1">
+            <div
+              class="flex align-items-center justify-content-center overflow-hidden"
+            >
+              <h1 class="ml-2 text-xl">
+                {{ pokemon.pokemonSpecieResult.name | titlecase }}
+              </h1>
+
+              @for (type of pokemon.pokemonResult.types; track type.type.url) {
+                <div
+                  [class]="
+                    type.type.name +
+                    ' flex align-items-center justify-content-center border-round-3xl m-1 px-1 w-4rem'
+                  "
+                >
+                  <span class="text-xs text-center">
+                    {{ type.type.name | titlecase }}
+                  </span>
+                </div>
+              }
+            </div>
+            <div class="break-flex"></div>
+            <div
+              class="flex align-items-center justify-content-center bg-gray-100 border-round h-2rem"
+            >
+              <span class="border-round px-2 text-xs">
+                HP <b>{{ pokemon.pokemonResult.stats[0].base_stat }}</b>
+              </span>
+            </div>
+            <div
+              class="flex align-items-center justify-content-center bg-gray-100 border-round h-2rem"
+            >
+              <span class="border-round px-2 text-xs">
+                W
+                <b>{{ pokemon.pokemonResult.weight / divide_factor + 'kg' }}</b>
+              </span>
+            </div>
+            <div
+              class="flex align-items-center justify-content-center bg-gray-100 border-round h-2rem"
+            >
+              <span class="border-round px-2 text-xs">
+                H
+                <b>{{ pokemon.pokemonResult.height / divide_factor + 'm' }}</b>
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="flip-card-back">
-      <h1>{{ pokemon.pokemonSpecieResult.name | titlecase }}</h1>
-      <p class="p-2">{{ pokemon.pokemonSpecieResult.flavor_text_entries[0].flavor_text }}</p>
-      <div class="flex justify-content-center flex-wrap gap-2">
-      @for (type of pokemon.pokemonResult.types; track $index) {
-        
-      <div [class]="type.type.name + ' p-2 mt-4  flex align-items-center justify-content-center mt-2 border-round-3xl px-2 h-2rem'">
-        <p class="text-sm text-white">
-          {{ type.type.name }}
-        </p>
+      <div class="flip-card-back">
+        <h1>{{ pokemon.pokemonSpecieResult.name | titlecase }}</h1>
+        <span class="p-2">
+          {{ pokemonText }}
+        </span>
+        <div class="flex justify-content-center flex-wrap gap-2">
+          @for (type of pokemon.pokemonResult.types; track $index) {
+            <div
+              [class]="
+                type.type.name +
+                ' p-2 mt-4  flex align-items-center justify-content-center mt-2 border-round-3xl px-2 h-2rem'
+              "
+            >
+              <span class="text-sm text-white">
+                {{ type.type.name }}
+              </span>
+            </div>
+          }
+        </div>
       </div>
-    
-      }
-    </div>
-    </div>
-  }
+    }
   </div>
 </div>

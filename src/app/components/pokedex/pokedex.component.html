@@ -1,41 +1,35 @@
 <div class="flex flex-column flex-wrap justify-content-center">
-  <div class="flex justify-content-center align-items-center ">
+  <div class="flex justify-content-center align-items-center">
     <img
-    class="w-20rem mt-4"
+      class="w-20rem mt-4"
       src="assets/images/pokedex_logo.webp"
       alt="pokedex"
-     
     />
   </div>
   <div class="flex justify-content-center align-items-center mt-4">
-
-    <span>Explore Pokémon cities with our Pokédex and assemble your own team.</span>
-    
+    <span
+      >Explore Pokémon cities with our Pokédex and assemble your own team.</span
+    >
   </div>
 
-  <p-dropdown
-    class="flex justify-content-center align-items-center mt-4 mb-4"
-    [options]="pokedexs"
-    [(ngModel)]="selectedPokedexs"
-    (onChange)="changePokedex($event)"
-    optionLabel="name"
-    [showClear]="true"
-    [filter]="true"
-    filterBy="name"
-    name="selectedPokedexs"
-    placeholder="Select a City"
-  ></p-dropdown>
+  @if (pokedexs) {
+    <p-dropdown
+      class="flex justify-content-center align-items-center mt-4 mb-4"
+      [options]="pokedexs"
+      [(ngModel)]="selectedPokedexDrop"
+      (onChange)="changePokedex($event)"
+      optionLabel="name"
+      [showClear]="true"
+      [filter]="true"
+      filterBy="name"
+      name="selectedPokedexs"
+      placeholder="Select a pokedex"
+      [optionValue]=""
+    ></p-dropdown>
+  }
 </div>
 
-
-
 <div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
-  @if(!selectedPokedex){
-    <div>
-      <h2>No Cities selected</h2>
-    </div>
-  
-  }
   @for (
     pokemonEntry of selectedPokedex?.pokemon_entries | slice: 0 : 20;
     track pokemonEntry.entry_number
@@ -44,5 +38,9 @@
       class="flex w-15rem h-25rem align-items-center justify-content-center"
       [pokemonUrl]="pokemonEntry.pokemon_species.url"
     ></app-pokemon-card>
-  } @empty {}
+  } @empty {
+    <div>
+      <h2>No pokedex selected</h2>
+    </div>
+  }
 </div>
