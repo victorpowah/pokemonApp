@@ -11,7 +11,7 @@ export class ThemeService {
     ) as HTMLLinkElement
 
     if (themeLink) {
-      themeLink.href = `bootstrap4-dark-purple.css`
+      themeLink.href = `bootstrap4-light-purple.css`
     }
   }
 
