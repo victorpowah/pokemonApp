@@ -1,13 +1,10 @@
 <p-toolbar
   styleClass="bg-gray-900 shadow-2"
-  [style]="{
-    'background-image':
-      'linear-gradient(to right, var(--indigo-200), var(--indigo-500))'
-  }"
+  
 >
   <ng-template pTemplate="start">
     <img
-      class="w-3rem"
+      class="w-2rem"
       src="assets/images/pokeball-png-45330.png"
       alt="pokeball"
     />
@@ -17,7 +14,13 @@
       <button
         class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
       >
-        <i class="pi pi-user text-2xl"></i>
+        <i class="pi pi-home text-2xl" routerLink="/"></i>
+      </button>
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white p-2  hover:bg-white-alpha-10 transition-all transition-duration-200"
+      >
+      <span class="text-white " routerLink="/pokedex">Pokédex</span>
+        
       </button>
       <button
         class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
@@ -32,7 +35,7 @@
         class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
         (click)="changeTheme()"
       >
-        <i class="pi pi-palette text-2xl"></i>
+        <i class="pi pi-moon text-2xl"></i>
       </button>
     </div>
   </ng-template>
