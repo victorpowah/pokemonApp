@@ -14,25 +14,39 @@ export class PokeApiService {
 
   constructor(private http: HttpClient) {}
 
-  getTypes(): Observable<PokeApiResponse> {
+  public getTypes(): Observable<PokeApiResponse> {
     return this.http.get<PokeApiResponse>(`${this.pokeApiUrl}/type`)
   }
 
-  getPokedexs(): Observable<PokeApiResponse> {
+  public getPokedexs(): Observable<PokeApiResponse> {
     return this.http.get<PokeApiResponse>(`${this.pokeApiUrl}/pokedex`)
   }
 
-  getPokedex(pokedexUrl: string): Observable<PokeApiPokedexResponse> {
+  public getPokedex(pokedexUrl: string): Observable<PokeApiPokedexResponse> {
     return this.http.get<PokeApiPokedexResponse>(pokedexUrl)
   }
 
-  getPokemonSpecie(
+  public getPokemonSpecie(
     pokemonSpecieUrl: string
   ): Observable<PokeApiPokemonSpecieResponse> {
     return this.http.get<PokeApiPokemonSpecieResponse>(`${pokemonSpecieUrl}`)
   }
 
-  getPokemon(pokemonUrl: string): Observable<PokeApiPokemonResponse> {
+  public getPokemon(pokemonUrl: string): Observable<PokeApiPokemonResponse> {
     return this.http.get<PokeApiPokemonResponse>(pokemonUrl)
+  }
+
+  public getPokemonById(pokemonID: number): Observable<PokeApiPokemonResponse> {
+    return this.http.get<PokeApiPokemonResponse>(
+      `${this.pokeApiUrl}/pokemon/${pokemonID}`
+    )
+  }
+
+  public getPokemonSpecieById(
+    pokemonID: number
+  ): Observable<PokeApiPokemonSpecieResponse> {
+    return this.http.get<PokeApiPokemonSpecieResponse>(
+      `${this.pokeApiUrl}/pokemon-species/${pokemonID}`
+    )
   }
 }
