@@ -13,22 +13,28 @@ import {
   Stat,
 } from '../../models/pokeApi-pokemon-respose.model'
 import { CommonModule, TitleCasePipe } from '@angular/common'
-import { ProgressBarModule } from 'primeng/progressbar'
 import { ToastModule } from 'primeng/toast'
 import { SelectedStatus } from '../../models/pokemon-detail/pokemon-detail-const.model'
 import { takeUntil, mergeMap, map, Subject } from 'rxjs'
 import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
 import { PokemonStatsPipe } from '../../pipes/pokemon-stats'
 import { PokeStatService } from '../../services/poke-stat.service'
+import { ProgressBarComponent } from '../progressbar/progressbar'
+import { PokemonHeightPipe } from '../../pipes/pokemon-height.pipe'
+import { PokemonWeightPipe } from '../../pipes/pokemon-weight.pipe'
+import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
   imports: [
     CommonModule,
-    ProgressBarModule,
+    ProgressBarComponent,
     ToastModule,
     TitleCasePipe,
     PokemonStatsPipe,
+    PokemonHeightPipe,
+    PokemonWeightPipe,
+    ReplaceCommaPipe,
   ],
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.scss',

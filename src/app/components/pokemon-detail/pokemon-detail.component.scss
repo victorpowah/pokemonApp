@@ -9,83 +9,25 @@
   padding: 0.375rem 0.75rem;
 }
 
-// Colors
-.black {
-  background-color: #607d8b !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
+.ability,
+.variety {
+  border-radius: 2px;
+  padding: 2px 3px;
+  margin-right: 6px;
+  white-space: nowrap;
+  line-height: initial;
 }
 
-.blue {
-  background-color: #81d4fa !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
+.hiddenAbility {
+  filter: brightness(110%) saturate(50%);
 }
 
-.brown {
-  background-color: #bcaaa4 !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
-}
-
-.gray {
-  background-color: #a6a6a6 !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
-}
-
-.green {
-  background-color: #81c784 !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
-}
-
-.pink {
-  background-color: #f8bbd0 !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
-}
-
-.purple {
-  background-color: #ad8ee7 !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
-}
-
-.red {
-  background-color: #ff8a80 !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
-}
-
-.white {
-  background-color: #d5dbe1 !important;
-  color: dimgray !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
-}
-
-.yellow {
-  background-color: #ffd600 !important;
-  color: white !important;
-  transition:
-    background-color 1000ms ease-in,
-    width 1500ms ease-in-out;
+//Type Box
+.icon {
+  border-radius: 4px;
+  height: 30px;
+  width: 90px;
+  filter: saturate(100%) brightness(110%);
+  transition: 200ms all;
+  margin-right: 15px;
 }
