@@ -1,14 +1,13 @@
 import { Component } from '@angular/core'
 import { ToolbarModule } from 'primeng/toolbar'
-import { AvatarModule } from 'primeng/avatar'
 import { ButtonModule } from 'primeng/button'
 import { ThemeService } from '../../services/theme-service.service'
-import { Router, RouterLink } from '@angular/router'
+import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [ToolbarModule, AvatarModule, ButtonModule,RouterLink],
+  imports: [ToolbarModule, ButtonModule, RouterLink],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
 })

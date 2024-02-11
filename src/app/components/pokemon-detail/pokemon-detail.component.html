@@ -1,0 +1,86 @@
+@if (pokemon) {
+  <div class="flex flex-row flex-wrap col-12">
+    <img
+      class="flex mt-5 col-4"
+      [src]="
+        pokemon.pokemonResult.sprites.other?.['official-artwork']?.front_default
+      "
+      alt="pokemon"
+    />
+    <div class="flex flex-wrap col-4">
+      <table>
+        <tr>
+          <td></td>
+          <td>
+            <button
+              class="btn mx-1"
+              (click)="showStats(selectedStatus.BASE)"
+              [ngClass]="
+                selectedStat === selectedStatus.BASE
+                  ? pokemon.pokemonSpecieResult.color.name
+                  : null
+              "
+            >
+              Base
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn mx-1"
+              (click)="showStats(selectedStatus.MIN)"
+              [ngClass]="
+                selectedStat === selectedStatus.MIN
+                  ? pokemon.pokemonSpecieResult.color.name
+                  : null
+              "
+            >
+              Min
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn mx-1"
+              (click)="showStats(selectedStatus.MAX)"
+              [ngClass]="
+                selectedStat === selectedStatus.MAX
+                  ? pokemon.pokemonSpecieResult.color.name
+                  : null
+              "
+            >
+              Max
+            </button>
+          </td>
+        </tr>
+        @for (
+          pokemonStat of pokemon.pokemonResult.stats;
+          track pokemonStat.stat.name
+        ) {
+          <tr>
+            <td class="text-right">
+              {{ pokemonStat.stat.name | titlecase }}
+            </td>
+            <td colspan="3">
+              <p-progressBar
+                *ngIf="
+                  pokemonStat.base_stat
+                    | pokemonStats
+                      : pokemon.pokemonResult.id
+                      : selectedStat
+                      : pokemonStat.stat.name === 'hp' as stat
+                "
+                [value]="(stat / this.maxBaseStat) * 100"
+                aria-valuenow=""
+                aria-valuemin="0"
+                aria-valuemax="255"
+              >
+                <ng-template pTemplate="content" let-value>
+                  <span>{{ stat }}</span>
+                </ng-template>
+              </p-progressBar>
+            </td>
+          </tr>
+        }
+      </table>
+    </div>
+  </div>
+}
