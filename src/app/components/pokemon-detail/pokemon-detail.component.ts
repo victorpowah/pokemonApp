@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PokeApiService } from '../../services/poke-api.service'
 import {
@@ -26,7 +33,9 @@ import { PokeStatService } from '../../services/poke-stat.service'
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.scss',
 })
-export class PokemonDetailComponent implements OnInit, OnDestroy {
+export class PokemonDetailComponent
+  implements OnInit, OnDestroy, AfterContentChecked
+{
   public pokemon!: {
     pokemonSpecieResult: PokeApiPokemonSpecieResponse
     pokemonResult: PokeApiPokemonResponse
@@ -44,7 +53,10 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   private readonly pokeStatService = inject(PokeStatService)
   private destroy$ = new Subject<void>()
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cdref: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
@@ -62,6 +74,9 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
         }
       })
   }
+  ngAfterContentChecked() {
+    this.cdref.detectChanges()
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next()
@@ -70,6 +85,7 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
 
   public showStats(stat: SelectedStatus) {
     this.selectedStat = stat
+    this.maxBaseStat = 0
   }
 
   private getPokemon(): void {
