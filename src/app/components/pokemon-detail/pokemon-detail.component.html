@@ -75,17 +75,19 @@
           <tr>
             <td class="text-right font-bold">Forms</td>
             <td>
-              @for (
-                form of pokemon.pokemonSpecieResult.varieties;
-                track form.pokemon.name
-              ) {
-                <span
-                  [ngClass]="
-                    'variety ' + pokemon.pokemonSpecieResult.color.name
-                  "
-                  >{{ form.pokemon.name | uppercase }}</span
-                >
-              }
+              <div class="flex flex-row flex-wrap">
+                @for (
+                  form of pokemon.pokemonSpecieResult.varieties;
+                  track form.pokemon.name
+                ) {
+                  <span
+                    [ngClass]="
+                      'flex variety ' + pokemon.pokemonSpecieResult.color.name
+                    "
+                    >{{ form.pokemon.name | uppercase }}</span
+                  >
+                }
+              </div>
             </td>
           </tr>
         </table>
