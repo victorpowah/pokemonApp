@@ -1,8 +1,9 @@
-import { Component } from '@angular/core'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { ToolbarModule } from 'primeng/toolbar'
 import { ButtonModule } from 'primeng/button'
 import { ThemeService } from '../../services/theme-service.service'
 import { RouterLink } from '@angular/router'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-toolbar',
@@ -11,12 +12,24 @@ import { RouterLink } from '@angular/router'
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
 })
-export class ToolbarComponent {
-  themeSelection: boolean = false
+export class ToolbarComponent implements OnInit, OnDestroy {
+  public themeSelection: boolean = false
+  public colorClass: string = ''
+  private readonly themeService = inject(ThemeService)
+  private destroy$ = new Subject<void>()
 
-  constructor(private readonly themeService: ThemeService) {}
+  ngOnInit(): void {
+    this.themeService.getColorClass().subscribe((colorClass: string) => {
+      this.colorClass = colorClass
+    })
+  }
 
-  changeTheme(): void {
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+  public changeTheme(): void {
     this.themeSelection = !this.themeSelection
     this.themeService.changeTheme(this.themeSelection ? 'dark' : 'light')
   }

@@ -23,6 +23,7 @@ import { PokemonHeightPipe } from '../../pipes/pokemon-height.pipe'
 import { PokemonWeightPipe } from '../../pipes/pokemon-weight.pipe'
 import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 import { PokemonStatsPipe } from '../../pipes/pokemon-stats.pipe'
+import { ThemeService } from '../../services/theme-service.service'
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
@@ -55,10 +56,13 @@ export class PokemonDetailComponent
 
   public pokemonGenera: string = ''
 
+  public selectedForm: string = ''
+
   private pokemonId!: number
 
   private readonly pokeApiService = inject(PokeApiService)
   private readonly pokeStatService = inject(PokeStatService)
+  private readonly themeService = inject(ThemeService)
   private destroy$ = new Subject<void>()
 
   constructor(
@@ -89,11 +93,25 @@ export class PokemonDetailComponent
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+
+    this.themeService.setColorClass('bg-gray-900')
   }
 
   public showStats(stat: SelectedStatus) {
     this.selectedStat = stat
     this.maxBaseStat = 0
+  }
+
+  public changeVariety(varietyUrl: string) {
+    this.selectedForm = varietyUrl
+    this.maxBaseStat = 0
+
+    this.pokeApiService
+      .getPokemon(varietyUrl)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((pokemonResult: PokeApiPokemonResponse) => {
+        this.pokemon.pokemonResult = pokemonResult
+      })
   }
 
   private getPokemon(): void {
@@ -119,16 +137,22 @@ export class PokemonDetailComponent
         }) => {
           this.pokemon = pokemonSpecieResult
 
-          const pokemonGeneraResult =
-            this.pokemon.pokemonSpecieResult.genera.find(
-              (genera) => genera.language.name === 'en'
-            )
-          this.pokemonGenera = pokemonGeneraResult
-            ? pokemonGeneraResult.genus
-            : ''
+          this.initializePokemon()
           this.calculateStats()
         }
       )
+  }
+
+  private initializePokemon() {
+    const pokemonGeneraResult = this.pokemon.pokemonSpecieResult.genera.find(
+      (genera) => genera.language.name === 'en'
+    )
+    this.pokemonGenera = pokemonGeneraResult ? pokemonGeneraResult.genus : ''
+
+    this.selectedForm =
+      this.pokemon.pokemonSpecieResult.varieties[0].pokemon.url
+
+    this.themeService.setColorClass(this.pokemon.pokemonSpecieResult.color.name)
   }
 
   private calculateStats(): void {

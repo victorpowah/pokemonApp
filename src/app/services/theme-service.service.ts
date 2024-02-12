@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common'
 import { Injectable, Inject } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,17 @@ export class ThemeService {
     if (themeLink) {
       themeLink.href = `bootstrap4-${theme}-purple.css`
     }
+  }
+
+  private colorClass$: BehaviorSubject<string> = new BehaviorSubject(
+    'bg-gray-900'
+  )
+
+  getColorClass(): Observable<string> {
+    return this.colorClass$.asObservable()
+  }
+
+  setColorClass(stat: string) {
+    this.colorClass$.next(stat)
   }
 }
