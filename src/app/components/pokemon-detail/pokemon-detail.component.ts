@@ -53,6 +53,8 @@ export class PokemonDetailComponent
 
   public selectedStatus = SelectedStatus
 
+  public pokemonGenera: string = ''
+
   private pokemonId!: number
 
   private readonly pokeApiService = inject(PokeApiService)
@@ -117,6 +119,13 @@ export class PokemonDetailComponent
         }) => {
           this.pokemon = pokemonSpecieResult
 
+          const pokemonGeneraResult =
+            this.pokemon.pokemonSpecieResult.genera.find(
+              (genera) => genera.language.name === 'en'
+            )
+          this.pokemonGenera = pokemonGeneraResult
+            ? pokemonGeneraResult.genus
+            : ''
           this.calculateStats()
         }
       )
