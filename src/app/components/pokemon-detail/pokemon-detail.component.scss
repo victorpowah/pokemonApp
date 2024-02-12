@@ -19,7 +19,12 @@
   line-height: initial;
 }
 
-.hiddenAbility {
+.variety:hover {
+  cursor: pointer;
+}
+
+.hiddenAbility,
+.varietySelected {
   filter: brightness(110%) saturate(50%);
 }
 
