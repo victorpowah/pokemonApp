@@ -14,7 +14,7 @@ import { ItemCardComponent } from '../item-card/item-card.component'
 })
 export class ItemsComponent implements OnInit, OnDestroy {
   private readonly pokeApiService = inject(PokeApiService)
-
+  page: number = 1
   items!: PokeApiResponse | undefined
 
   private destroy$ = new Subject<void>()
@@ -40,8 +40,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     console.log(pagination)
     if (pagination === 'next') {
       typePagination = this.items?.next
+      this.page = this.page + 1
     } else if (pagination === 'previous') {
       typePagination = this.items?.previous
+      this.page = this.page - 1
     }
 
     this.pokeApiService

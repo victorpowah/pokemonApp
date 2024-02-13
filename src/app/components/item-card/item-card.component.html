@@ -1,20 +1,29 @@
 <div class="card flex justify-content-center">
   @if (item$ | async; as item){
-  <p-card [header]="item.name" subheader="Card Subheader">
-    <ng-template pTemplate="header">
-      <img class="w-10rem" alt="Card" [src]="item.sprites.default" />
-    </ng-template>
-    <p>{{ item.effect_entries | pokemonItemText }}</p>
-    <ng-template pTemplate="footer">
-      <p-button label="Save" icon="pi pi-check"></p-button>
-      <p-button
-        label="Cancel"
-        icon="pi pi-times"
-        styleClass="p-button-secondary"
-        [style]="{ 'margin-left': '.5em' }"
-      ></p-button>
-    </ng-template>
-  </p-card>
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <img class="custom-card-image" alt="Card" [src]="item.sprites.default" />
+      <h2 class="text-gray-900">{{ item.name }}</h2>
+    </div>
+    <div class="custom-card-content h-full">
+      <div class="flex justify-content-start flex-wrap">
+        @for ( item of item.attributes; track item.name ) {
+
+        <span
+          class="text-xs text-gray-900 p-1 text-center bg-cyan-100 flex align-items-center justify-content-center border-round m-1"
+        >
+          {{ item.name | titlecase }}
+        </span>
+
+        }
+      </div>
+
+      <p class="text-gray-900">
+        {{ item.flavor_text_entries | pokemonItemText }}
+      </p>
+    </div>
+  </div>
+
   }@else{
   <p-progressSpinner></p-progressSpinner>
   }

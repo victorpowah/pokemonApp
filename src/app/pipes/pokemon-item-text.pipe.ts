@@ -1,18 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { EffectEntry } from '../models/pokeApi-item-response.model'
+import { FlavorTextEntry } from '../models/pokeApi-item-response.model'
 
 @Pipe({ name: 'pokemonItemText', standalone: true })
 export class PokemonItemTextPipe implements PipeTransform {
-  transform(value: EffectEntry[] | null): string {
+  transform(value: FlavorTextEntry[] | null): string {
     if (!value) {
       return ''
     }
-    const effect = value.find((effectEntry: EffectEntry) => {
-      effectEntry.language.name === 'en'
-    })?.effect
+    const flavorText = value.find((flavorText: FlavorTextEntry) => {
+      return flavorText.language.name === 'en'
+    })
 
-    console.log(effect)
-
-    return effect ? effect : ''
+    return flavorText ? flavorText.text : ''
   }
 }
