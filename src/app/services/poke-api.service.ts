@@ -5,6 +5,7 @@ import { PokeApiResponse } from '../models/pokeApi-response.model'
 import { PokeApiPokedexResponse } from '../models/pokeApi-pokedex-response.model'
 import { PokeApiPokemonSpecieResponse } from '../models/pokeApi-pokemon-specie-response.model'
 import { PokeApiPokemonResponse } from '../models/pokeApi-pokemon-respose.model'
+import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -49,4 +50,18 @@ export class PokeApiService {
       `${this.pokeApiUrl}/pokemon-species/${pokemonID}`
     )
   }
+
+  public getItems(): Observable<PokeApiResponse> {
+    return this.http.get<PokeApiResponse>(`${this.pokeApiUrl}/item`)
+
+  }
+
+  public getItem(itemUrl: string): Observable<PokeApiItemResponse> {
+    return this.http.get<PokeApiItemResponse>(itemUrl)
+  }
+
+  public getItemNextPage(itemUrl: string): Observable<PokeApiResponse> {
+    return this.http.get<PokeApiResponse>(itemUrl)
+  }
+
 }

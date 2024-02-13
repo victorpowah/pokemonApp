@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { ToolbarModule } from 'primeng/toolbar'
 import { ButtonModule } from 'primeng/button'
 import { ThemeService } from '../../services/theme-service.service'
-import { RouterLink } from '@angular/router'
+import { RouterLink, RouterLinkActive } from '@angular/router'
 import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [ToolbarModule, ButtonModule, RouterLink],
+  imports: [ToolbarModule, ButtonModule, RouterLink, RouterLinkActive],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
 })
