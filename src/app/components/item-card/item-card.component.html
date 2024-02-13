@@ -1,0 +1,21 @@
+<div class="card flex justify-content-center">
+  @if (item$ | async; as item){
+  <p-card [header]="item.name" subheader="Card Subheader">
+    <ng-template pTemplate="header">
+      <img class="w-10rem" alt="Card" [src]="item.sprites.default" />
+    </ng-template>
+    <p>{{ item.effect_entries | pokemonItemText }}</p>
+    <ng-template pTemplate="footer">
+      <p-button label="Save" icon="pi pi-check"></p-button>
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        styleClass="p-button-secondary"
+        [style]="{ 'margin-left': '.5em' }"
+      ></p-button>
+    </ng-template>
+  </p-card>
+  }@else{
+  <p-progressSpinner></p-progressSpinner>
+  }
+</div>

@@ -1,0 +1,30 @@
+<div
+  class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center mt-4"
+>
+  @for ( item of items?.results ; track item.name ) {
+
+  <app-item-card
+    class="flex align-items-center justify-content-center"
+    [itemUrl]="item.url"
+  ></app-item-card>
+
+  } @empty {
+  <div>
+    <h2>No pokedex selected</h2>
+  </div>
+  }
+</div>
+<div class="flex justify-content-center flex-wrap">
+  <p-button
+    class="flex align-items-center justify-content-center bg-primary font-bold border-round m-2"
+    [disabled]="!items?.previous"
+    (click)="nextPage('previous')"
+    label="Previus"
+  ></p-button>
+  <p-button
+    class="flex align-items-center justify-content-center bg-primary font-bold border-round m-2"
+    [disabled]="!items?.next"
+    (click)="nextPage('next')"
+    label="Next"
+  ></p-button>
+</div>
