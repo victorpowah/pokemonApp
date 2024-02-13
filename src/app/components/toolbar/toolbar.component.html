@@ -9,14 +9,23 @@
   <ng-template pTemplate="center">
     <div class="flex flex-wrap align-items-center gap-3">
       <button
+        routerLinkActive="bg-white-alpha-10"
+        routerLink="/home"
         class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
       >
-        <i class="pi pi-home text-2xl" routerLink="/"></i>
+        <i class="pi pi-home text-2xl"></i>
       </button>
       <button
+        routerLinkActive="bg-white-alpha-10"
         class="p-link inline-flex justify-content-center align-items-center text-white p-2 hover:bg-white-alpha-10 transition-all transition-duration-200"
       >
         <span class="text-white" routerLink="/pokedex">Pokédex</span>
+      </button>
+      <button
+        routerLinkActive="bg-white-alpha-10"
+        class="p-link inline-flex justify-content-center align-items-center text-white p-2 hover:bg-white-alpha-10 transition-all transition-duration-200"
+      >
+        <span class="text-white" routerLink="/items">Items</span>
       </button>
       <button
         class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
