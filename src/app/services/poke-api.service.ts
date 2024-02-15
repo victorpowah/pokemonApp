@@ -5,8 +5,8 @@ import { PokeApiResponse } from '../models/pokeApi-response.model'
 import { PokeApiPokedexResponse } from '../models/pokeApi-pokedex-response.model'
 import { PokeApiPokemonSpecieResponse } from '../models/pokeApi-pokemon-specie-response.model'
 import { PokeApiPokemonResponse } from '../models/pokeApi-pokemon-respose.model'
-import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
 import { PokeApiEvolutionChainResponse } from '../models/pokeApi-evolution-chain-response.model'
+import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
 
 @Injectable({
   providedIn: 'root',

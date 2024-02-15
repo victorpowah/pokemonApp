@@ -24,6 +24,8 @@ import { PokemonWeightPipe } from '../../pipes/pokemon-weight.pipe'
 import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 import { PokemonStatsPipe } from '../../pipes/pokemon-stats.pipe'
 import { ThemeService } from '../../services/theme-service.service'
+import { PokeApiEvolutionChainResponse } from '../../models/pokeApi-evolution-chain-response.model'
+
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
@@ -47,6 +49,8 @@ export class PokemonDetailComponent
     pokemonSpecieResult: PokeApiPokemonSpecieResponse
     pokemonResult: PokeApiPokemonResponse
   }
+
+  public evolutionChain!: PokeApiEvolutionChainResponse
 
   public maxBaseStat: number = 0
 
@@ -163,7 +167,15 @@ export class PokemonDetailComponent
     )
   }
 
+  // evolution.chain.evolves_to[0].species.url
+  // evolution.chain.evolves_to[0].evolves_to[0].species.url
   private getEvolutionChain(): void {
+    this.pokeApiService
+      .getEvolutionChain(this.pokemon.pokemonSpecieResult.evolution_chain.url)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((evolutionChain: PokeApiEvolutionChainResponse) => {
+        this.evolutionChain = evolutionChain
+      })
     return
   }
 }
