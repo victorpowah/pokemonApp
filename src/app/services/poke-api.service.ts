@@ -6,6 +6,7 @@ import { PokeApiPokedexResponse } from '../models/pokeApi-pokedex-response.model
 import { PokeApiPokemonSpecieResponse } from '../models/pokeApi-pokemon-specie-response.model'
 import { PokeApiPokemonResponse } from '../models/pokeApi-pokemon-respose.model'
 import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
+import { PokeApiEvolutionChainResponse } from '../models/pokeApi-evolution-chain-response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -53,15 +54,19 @@ export class PokeApiService {
 
   public getItems(): Observable<PokeApiResponse> {
     return this.http.get<PokeApiResponse>(`${this.pokeApiUrl}/item`)
-
   }
 
   public getItem(itemUrl: string): Observable<PokeApiItemResponse> {
     return this.http.get<PokeApiItemResponse>(itemUrl)
   }
 
-  public getItemNextPage(itemUrl: string): Observable<PokeApiResponse> {
+  public getItemsPaginated(itemUrl: string): Observable<PokeApiResponse> {
     return this.http.get<PokeApiResponse>(itemUrl)
   }
 
+  public getEvolutionChain(
+    evolutionUrl: string
+  ): Observable<PokeApiEvolutionChainResponse> {
+    return this.http.get<PokeApiEvolutionChainResponse>(evolutionUrl)
+  }
 }

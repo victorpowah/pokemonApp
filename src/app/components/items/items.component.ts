@@ -15,7 +15,7 @@ import { ItemCardComponent } from '../item-card/item-card.component'
 export class ItemsComponent implements OnInit, OnDestroy {
   private readonly pokeApiService = inject(PokeApiService)
   page: number = 1
-  items!: PokeApiResponse | undefined
+  items!: PokeApiResponse
 
   private destroy$ = new Subject<void>()
 
@@ -23,40 +23,22 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.pokeApiService
       .getItems()
       .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data: PokeApiResponse) => {
-          this.items = data
-          console.log('Items received:', data)
-        },
-        error: (error) => {
-          console.error('Error fetching items:', error)
-        },
+      .subscribe((itemResponse: PokeApiResponse) => {
+        this.items = itemResponse
       })
   }
 
   nextPage(pagination: string): void {
-    let typePagination: any
+    const isNext = pagination === 'next'
+    const typePagination = isNext ? this.items.next : this.items.previous
 
-    console.log(pagination)
-    if (pagination === 'next') {
-      typePagination = this.items?.next
-      this.page = this.page + 1
-    } else if (pagination === 'previous') {
-      typePagination = this.items?.previous
-      this.page = this.page - 1
-    }
+    this.page = isNext ? this.page++ : this.page--
 
     this.pokeApiService
-      .getItemNextPage(typePagination)
+      .getItemsPaginated(typePagination)
       .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data: PokeApiResponse) => {
-          this.items = data
-          console.log('Items received:', data)
-        },
-        error: (error) => {
-          console.error('Error fetching items:', error)
-        },
+      .subscribe((itemResponse: PokeApiResponse) => {
+        this.items = itemResponse
       })
   }
 
