@@ -24,6 +24,8 @@ import { PokemonWeightPipe } from '../../pipes/pokemon-weight.pipe'
 import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 import { PokemonStatsPipe } from '../../pipes/pokemon-stats.pipe'
 import { ThemeService } from '../../services/theme-service.service'
+import { PokemonEvolveChainComponent } from '../pokemon-evolve-chain/pokemon-evolve-chain.component'
+
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
@@ -36,6 +38,7 @@ import { ThemeService } from '../../services/theme-service.service'
     PokemonHeightPipe,
     PokemonWeightPipe,
     ReplaceCommaPipe,
+    PokemonEvolveChainComponent,
   ],
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.scss',
