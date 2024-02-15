@@ -1,0 +1,38 @@
+@if (ev1 && !ev2?.id && !ev3?.id) {
+  <span>This pokémon does not evolve.</span>
+}
+
+@if (ev1 && ev1.id) {
+  <img
+    [routerLink]="['/pokemon', ev1.id]"
+    [src]="ev1.sprites.other?.['official-artwork']?.front_default"
+    alt="ev1"
+  />
+}
+@if (ev2 && ev2.id) {
+  @if (evolutionChain) {
+    <span>{{
+      evolutionChain.chain.evolves_to[0].evolution_details[0]
+        | pokemonEvolutionDescription
+    }}</span>
+  }
+  <img
+    [routerLink]="['/pokemon', ev2.id]"
+    [src]="ev2.sprites.other?.['official-artwork']?.front_default"
+    alt="ev2"
+  />
+}
+
+@if (ev3 && ev3.id) {
+  @if (evolutionChain) {
+    <span>{{
+      evolutionChain.chain.evolves_to[0].evolves_to[0].evolution_details[0]
+        | pokemonEvolutionDescription
+    }}</span>
+  }
+  <img
+    [routerLink]="['/pokemon', ev3.id]"
+    [src]="ev3.sprites.other?.['official-artwork']?.front_default"
+    alt="ev3"
+  />
+}
