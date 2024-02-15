@@ -24,6 +24,8 @@ import { PokemonWeightPipe } from '../../pipes/pokemon-weight.pipe'
 import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 import { PokemonStatsPipe } from '../../pipes/pokemon-stats.pipe'
 import { ThemeService } from '../../services/theme-service.service'
+import { PokemonEvolveChainComponent } from '../pokemon-evolve-chain/pokemon-evolve-chain.component'
+
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
@@ -36,6 +38,7 @@ import { ThemeService } from '../../services/theme-service.service'
     PokemonHeightPipe,
     PokemonWeightPipe,
     ReplaceCommaPipe,
+    PokemonEvolveChainComponent,
   ],
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.scss',
@@ -153,17 +156,11 @@ export class PokemonDetailComponent
       this.pokemon.pokemonSpecieResult.varieties[0].pokemon.url
 
     this.themeService.setColorClass(this.pokemon.pokemonSpecieResult.color.name)
-
-    this.getEvolutionChain()
   }
 
   private calculateStats(): void {
     this.maxBaseStat = Math.max(
       ...this.pokemon.pokemonResult.stats.map((stat: Stat) => stat.base_stat)
     )
-  }
-
-  private getEvolutionChain(): void {
-    return
   }
 }

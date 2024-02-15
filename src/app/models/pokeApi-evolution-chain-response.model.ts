@@ -10,31 +10,31 @@ export interface Chain {
   evolution_details: EvolutionDetail[]
   evolves_to: Chain[]
   is_baby: boolean
-  species: Species
+  species: NamedAPIResource
 }
 
 export interface EvolutionDetail {
-  gender: null
-  held_item: null
-  item: null
-  known_move: null
-  known_move_type: null
-  location: null
-  min_affection: null
-  min_beauty: null
-  min_happiness: null
+  gender: unknown
+  held_item: NamedAPIResource
+  item: NamedAPIResource
+  known_move: NamedAPIResource
+  known_move_type: NamedAPIResource
+  location: NamedAPIResource
+  min_affection: unknown
+  min_beauty: unknown
+  min_happiness: unknown
   min_level: number
   needs_overworld_rain: boolean
-  party_species: null
-  party_type: null
-  relative_physical_stats: null
+  party_species: NamedAPIResource
+  party_type: NamedAPIResource
+  relative_physical_stats: unknown
   time_of_day: string
-  trade_species: null
-  trigger: Species
+  trade_species: NamedAPIResource
+  trigger: NamedAPIResource
   turn_upside_down: boolean
 }
 
-export interface Species {
+export interface NamedAPIResource {
   name: string
   url: string
 }

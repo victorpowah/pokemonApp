@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { PokeApiResponse } from '../models/pokeApi-response.model'
 import { PokeApiPokedexResponse } from '../models/pokeApi-pokedex-response.model'
 import { PokeApiPokemonSpecieResponse } from '../models/pokeApi-pokemon-specie-response.model'
 import { PokeApiPokemonResponse } from '../models/pokeApi-pokemon-respose.model'
-import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
 import { PokeApiEvolutionChainResponse } from '../models/pokeApi-evolution-chain-response.model'
+import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -29,19 +29,25 @@ export class PokeApiService {
   }
 
   public getPokemonSpecie(
-    pokemonSpecieUrl: string
+    pokemonSpecieUrl?: string
   ): Observable<PokeApiPokemonSpecieResponse> {
-    return this.http.get<PokeApiPokemonSpecieResponse>(`${pokemonSpecieUrl}`)
+    return pokemonSpecieUrl
+      ? this.http.get<PokeApiPokemonSpecieResponse>(`${pokemonSpecieUrl}`)
+      : of({} as PokeApiPokemonSpecieResponse)
   }
 
   public getPokemon(pokemonUrl: string): Observable<PokeApiPokemonResponse> {
     return this.http.get<PokeApiPokemonResponse>(pokemonUrl)
   }
 
-  public getPokemonById(pokemonID: number): Observable<PokeApiPokemonResponse> {
-    return this.http.get<PokeApiPokemonResponse>(
-      `${this.pokeApiUrl}/pokemon/${pokemonID}`
-    )
+  public getPokemonById(
+    pokemonID?: number
+  ): Observable<PokeApiPokemonResponse> {
+    return pokemonID
+      ? this.http.get<PokeApiPokemonResponse>(
+          `${this.pokeApiUrl}/pokemon/${pokemonID}`
+        )
+      : of({} as PokeApiPokemonResponse)
   }
 
   public getPokemonSpecieById(
