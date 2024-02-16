@@ -1,38 +1,107 @@
-@if (ev1 && !ev2?.id && !ev3?.id) {
-  <span>This pokémon does not evolve.</span>
-}
-
-@if (ev1 && ev1.id) {
-  <img
-    [routerLink]="['/pokemon', ev1.id]"
-    [src]="ev1.sprites.other?.['official-artwork']?.front_default"
-    alt="ev1"
-  />
-}
-@if (ev2 && ev2.id) {
-  @if (evolutionChain) {
-    <span>{{
-      evolutionChain.chain.evolves_to[0].evolution_details[0]
-        | pokemonEvolutionDescription
-    }}</span>
+<h1 class="text-center Heading">
+  <span
+    [ngClass]="pokemon.pokemonSpecieResult.color.name + ' border-round p-1'"
+    >{{ pokemon.pokemonResult.name | uppercase }}</span
+  >
+</h1>
+<div
+  class="flex flex-row flex-wrap align-content-center justify-content-center gap-8"
+>
+  @if (ev1 && ev1.id) {
+    <div class="evo-div" style="padding: 10px">
+      @if (!ev2?.id && !ev3?.id) {
+        <div class="DNE">This Pokémon does not evolve.</div>
+      }
+      <img
+        class="evo-img"
+        [routerLink]="['/pokemon', ev1.id]"
+        [src]="ev1.sprites.other?.['official-artwork']?.front_default"
+        alt="ev1"
+      />
+      <div class="evo-id text-center">#{{ ev1.id }}</div>
+      <div
+        class="evo-name text-center"
+        style="padding: 0; bottom: 0"
+        [routerLink]="['/pokemon', ev1.id]"
+      >
+        <span
+          [ngClass]="
+            'evo-name ' +
+            pokemon.pokemonSpecieResult.color.name +
+            (ev1.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
+          "
+          >{{ ev1.name | uppercase }}</span
+        >
+      </div>
+    </div>
   }
-  <img
-    [routerLink]="['/pokemon', ev2.id]"
-    [src]="ev2.sprites.other?.['official-artwork']?.front_default"
-    alt="ev2"
-  />
-}
-
-@if (ev3 && ev3.id) {
-  @if (evolutionChain) {
-    <span>{{
-      evolutionChain.chain.evolves_to[0].evolves_to[0].evolution_details[0]
-        | pokemonEvolutionDescription
-    }}</span>
+  @if (ev2 && ev2.id) {
+    @if (evolutionChain) {
+      <div class="arrow-div evo-desc">
+        <img alt="" src="assets/images/right-arrow.png" class="evo-arrow" />
+        {{
+          evolutionChain.chain.evolves_to[0].evolution_details[0]
+            | pokemonEvolutionDescription
+        }}
+      </div>
+    }
+    <div class="evo-div">
+      <img
+        class="evo-img"
+        [routerLink]="['/pokemon', ev2.id]"
+        [src]="ev2.sprites.other?.['official-artwork']?.front_default"
+        alt="ev2"
+      />
+      <div class="evo-id text-center">#{{ ev2.id }}</div>
+      <div
+        class="evo-name text-center"
+        style="padding: 0; bottom: 0"
+        [routerLink]="['/pokemon', ev2.id]"
+      >
+        <span
+          [ngClass]="
+            'evo-name ' +
+            pokemon.pokemonSpecieResult.color.name +
+            (ev2.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
+          "
+          >{{ ev2.name | uppercase }}</span
+        >
+      </div>
+    </div>
   }
-  <img
-    [routerLink]="['/pokemon', ev3.id]"
-    [src]="ev3.sprites.other?.['official-artwork']?.front_default"
-    alt="ev3"
-  />
-}
+
+  @if (ev3 && ev3.id) {
+    @if (evolutionChain) {
+      <div class="arrow-div evo-desc">
+        <img alt="" src="assets/images/right-arrow.png" class="evo-arrow" />
+        {{
+          evolutionChain.chain.evolves_to[0].evolves_to[0].evolution_details[0]
+            | pokemonEvolutionDescription
+        }}
+      </div>
+    }
+    <div class="evo-div">
+      <img
+        class="evo-img"
+        [routerLink]="['/pokemon', ev3.id]"
+        [src]="ev3.sprites.other?.['official-artwork']?.front_default"
+        alt="ev3"
+      />
+      <div class="evo-id text-center">#{{ ev3.id }}</div>
+      <div
+        class="evo-name text-center"
+        style="padding: 0; bottom: 0"
+        [routerLink]="['/pokemon', ev3.id]"
+      >
+        <span
+          [ngClass]="
+            'evo-name ' +
+            pokemon.pokemonSpecieResult.color.name +
+            (ev3.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
+          "
+          >{{ ev3.name | uppercase }}</span
+        >
+      </div>
+    </div>
+  }
+</div>

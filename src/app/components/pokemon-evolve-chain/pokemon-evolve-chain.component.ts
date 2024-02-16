@@ -6,11 +6,12 @@ import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-speci
 import { PokeApiService } from '../../services/poke-api.service'
 import { RouterLink } from '@angular/router'
 import { PokemonEvolutionDescriptionPipe } from '../../pipes/pokemon-evolution-description.pipe'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-pokemon-evolve-chain',
   standalone: true,
-  imports: [RouterLink, PokemonEvolutionDescriptionPipe],
+  imports: [CommonModule, RouterLink, PokemonEvolutionDescriptionPipe],
   templateUrl: './pokemon-evolve-chain.component.html',
   styleUrl: './pokemon-evolve-chain.component.scss',
 })
