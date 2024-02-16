@@ -28,18 +28,31 @@
   }
 </div>
 
-<div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
-  @for (
-    pokemonEntry of selectedPokedex?.pokemon_entries | slice: 0 : 20;
-    track pokemonEntry.entry_number
-  ) {
-    <app-pokemon-card
-      class="flex w-15rem h-25rem align-items-center justify-content-center"
-      [pokemonUrl]="pokemonEntry.pokemon_species.url"
-    ></app-pokemon-card>
-  } @empty {
-    <div>
-      <h2>No pokedex selected</h2>
-    </div>
-  }
-</div>
+@if (selectedPokedex) {
+  <div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
+    @for (
+      pokemonEntry of selectedPokedex?.pokemon_entries
+        | slice: first : first + rows;
+      track pokemonEntry.entry_number
+    ) {
+      <app-pokemon-card
+        class="flex w-14rem h-25rem align-items-center justify-content-center"
+        [pokemonUrl]="pokemonEntry.pokemon_species.url"
+      ></app-pokemon-card>
+    } @empty {
+      <div>
+        <h2>No pokedex selected</h2>
+      </div>
+    }
+  </div>
+
+  <div class="flex justify-content-center">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="selectedPokedex.pokemon_entries.length"
+      [rowsPerPageOptions]="[10, 20, 30]"
+    ></p-paginator>
+  </div>
+}
