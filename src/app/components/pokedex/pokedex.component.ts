@@ -8,21 +8,32 @@ import { FormsModule } from '@angular/forms'
 import { PokeApiPokedexResponse } from '../../models/pokeApi-pokedex-response.model'
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component'
 import { Subject, map, mergeMap, takeUntil } from 'rxjs'
+import { PaginatorModule, PaginatorState } from 'primeng/paginator'
 
 @Component({
   selector: 'app-pokedex',
   standalone: true,
-  imports: [CommonModule, FormsModule, DropdownModule, PokemonCardComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    DropdownModule,
+    PokemonCardComponent,
+    PaginatorModule,
+  ],
   templateUrl: './pokedex.component.html',
   styleUrl: './pokedex.component.scss',
 })
 export class PokedexComponent implements OnInit, OnDestroy {
-  selectedPokedex: PokeApiPokedexResponse | undefined
-  selectedPokedexDrop: PokeApiInfo | undefined
+  public selectedPokedex: PokeApiPokedexResponse | undefined
+  public selectedPokedexDrop: PokeApiInfo | undefined
 
-  pokedexs!: PokeApiInfo[]
+  public pokedexs!: PokeApiInfo[]
 
-  selectedPokedexs!: PokeApiInfo[]
+  public selectedPokedexs!: PokeApiInfo[]
+
+  public first: number = 0
+
+  public rows: number = 20
 
   private readonly pokeApiService = inject(PokeApiService)
 
@@ -64,7 +75,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
     this.destroy$.complete()
   }
 
-  changePokedex(event: DropdownChangeEvent): void {
+  public changePokedex(event: DropdownChangeEvent): void {
     if (!event.value) {
       this.selectedPokedex = undefined
       return
@@ -76,5 +87,12 @@ export class PokedexComponent implements OnInit, OnDestroy {
       .subscribe((pokedex: PokeApiPokedexResponse) => {
         this.selectedPokedex = { ...pokedex }
       })
+  }
+
+  public onPageChange(event: PaginatorState): void {
+    this.first = event.first ? event.first : 0
+    this.rows = event.rows ? event.rows : 0
+
+    console.log(event)
   }
 }

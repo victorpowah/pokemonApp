@@ -11,11 +11,12 @@ import {
 } from '../../models/pokeApi-pokemon-respose.model'
 import { CommonModule, DecimalPipe } from '@angular/common'
 import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
+import { ProgressSpinnerModule } from 'primeng/progressspinner'
 
 @Component({
   selector: 'app-pokemon-card',
   standalone: true,
-  imports: [CommonModule, DecimalPipe, ReplaceCommaPipe],
+  imports: [CommonModule, DecimalPipe, ReplaceCommaPipe, ProgressSpinnerModule],
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.scss',
 })

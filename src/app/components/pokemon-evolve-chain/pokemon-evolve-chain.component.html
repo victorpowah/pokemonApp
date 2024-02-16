@@ -1,7 +1,7 @@
 <h1 class="text-center Heading">
   <span
     [ngClass]="pokemon.pokemonSpecieResult.color.name + ' border-round p-1'"
-    >{{ pokemon.pokemonResult.name | uppercase }}</span
+    >{{ 'EVOLUTION CHAIN' }}</span
   >
 </h1>
 <div
@@ -32,6 +32,17 @@
           "
           >{{ ev1.name | uppercase }}</span
         >
+      </div>
+      <div class="flex align-content-center justify-content-center">
+        @for (type of ev1.types; track type.type.name) {
+          <div [ngClass]="'evo-icon ' + type.type.name">
+            <img
+              class=""
+              alt=""
+              src="assets/images/type-icons/png/{{ type.type.name }}.png"
+            />
+          </div>
+        }
       </div>
     </div>
   }
@@ -67,6 +78,17 @@
           >{{ ev2.name | uppercase }}</span
         >
       </div>
+      <div class="flex align-content-center justify-content-center">
+        @for (type of ev2.types; track type.type.name) {
+          <div [ngClass]="'evo-icon ' + type.type.name">
+            <img
+              class=""
+              alt=""
+              src="assets/images/type-icons/png/{{ type.type.name }}.png"
+            />
+          </div>
+        }
+      </div>
     </div>
   }
 
@@ -101,6 +123,17 @@
           "
           >{{ ev3.name | uppercase }}</span
         >
+      </div>
+      <div class="flex align-content-center justify-content-center">
+        @for (type of ev3.types; track type.type.name) {
+          <div [ngClass]="'evo-icon ' + type.type.name">
+            <img
+              class=""
+              alt=""
+              src="assets/images/type-icons/png/{{ type.type.name }}.png"
+            />
+          </div>
+        }
       </div>
     </div>
   }
