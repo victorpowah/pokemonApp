@@ -1,0 +1,66 @@
+.arrow-div {
+  align-self: center;
+  text-align: center;
+  flex-direction: column-reverse;
+  display: flex;
+}
+
+.evo-desc {
+  color: #626262;
+}
+
+.evo-img {
+  width: auto;
+  height: 100px;
+  margin: auto;
+}
+
+.evo-img:hover {
+  cursor: pointer;
+}
+
+.evo-arrow {
+  width: auto;
+  height: 40px;
+  margin: auto;
+}
+
+.Heading {
+  font-size: x-large;
+  color: #6d6d6d;
+}
+
+.DNE {
+  text-align: center;
+  color: #626262;
+  padding: 0.3rem;
+}
+
+.evo-div {
+  align-self: center;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+}
+
+.evo-id {
+  color: #626262;
+  padding-bottom: 2px;
+}
+
+.evo-name {
+  margin-bottom: 8px;
+
+  span:hover {
+    cursor: pointer;
+  }
+
+  border-radius: 2px;
+  padding: 2px 3px;
+  white-space: nowrap;
+  line-height: initial;
+}
+
+.selectedEvo {
+  filter: brightness(110%) saturate(50%);
+}
