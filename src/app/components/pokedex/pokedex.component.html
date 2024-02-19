@@ -31,7 +31,7 @@
 @if (selectedPokedex) {
   <div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
     @for (
-      pokemonEntry of selectedPokedex?.pokemon_entries
+      pokemonEntry of selectedPokedex.pokemon_entries
         | slice: first : first + rows;
       track pokemonEntry.entry_number
     ) {
