@@ -7,6 +7,7 @@ import { PokeApiPokemonSpecieResponse } from '../models/pokeApi-pokemon-specie-r
 import { PokeApiPokemonResponse } from '../models/pokeApi-pokemon-respose.model'
 import { PokeApiEvolutionChainResponse } from '../models/pokeApi-evolution-chain-response.model'
 import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
+import { PokeApiTypeResponse } from '../models/pokeApi-type-response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -74,5 +75,20 @@ export class PokeApiService {
     evolutionUrl: string
   ): Observable<PokeApiEvolutionChainResponse> {
     return this.http.get<PokeApiEvolutionChainResponse>(evolutionUrl)
+  }
+
+  public getType(typeUrl: string | undefined): Observable<PokeApiTypeResponse> {
+    return typeUrl
+      ? this.http.get<PokeApiTypeResponse>(typeUrl)
+      : of({
+          damage_relations: {
+            double_damage_from: [],
+            double_damage_to: [],
+            half_damage_from: [],
+            half_damage_to: [],
+            no_damage_from: [],
+            no_damage_to: [],
+          },
+        } as unknown as PokeApiTypeResponse)
   }
 }

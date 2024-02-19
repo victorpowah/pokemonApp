@@ -1,10 +1,11 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import { PokeApiService } from '../../services/poke-api.service'
-import { Subject, takeUntil } from 'rxjs'
+import { takeUntil } from 'rxjs'
 import { PokeApiResponse } from '../../models/pokeApi-response.model'
 import { ButtonModule } from 'primeng/button'
 import { ItemCardComponent } from '../item-card/item-card.component'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
+import { DestroyService } from '../../services/destroy.service'
 
 @Component({
   selector: 'app-items',
@@ -12,13 +13,14 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner'
   templateUrl: './items.component.html',
   styleUrl: './items.component.scss',
   imports: [ButtonModule, ItemCardComponent, ProgressSpinnerModule],
+  providers: [DestroyService],
 })
-export class ItemsComponent implements OnInit, OnDestroy {
+export class ItemsComponent implements OnInit {
   private readonly pokeApiService = inject(PokeApiService)
   page: number = 1
   items!: PokeApiResponse
 
-  private destroy$ = new Subject<void>()
+  private destroy$ = inject(DestroyService)
 
   ngOnInit(): void {
     this.pokeApiService
@@ -42,10 +44,5 @@ export class ItemsComponent implements OnInit, OnDestroy {
       .subscribe((itemResponse: PokeApiResponse) => {
         this.items = itemResponse
       })
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next()
-    this.destroy$.complete()
   }
 }

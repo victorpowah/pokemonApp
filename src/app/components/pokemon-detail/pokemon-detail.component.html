@@ -1,203 +1,102 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 @if (pokemon) {
-  <h1 class="text-center section-Heading">
-    {{ pokemon.pokemonResult.name | uppercase }}
-  </h1>
-  <div class="justify-content-center text-center">
-    <!--    Had Padding Buttom 20px-->
-    <span
-      style="padding: 4px"
-      [ngClass]="'genera ' + pokemon.pokemonSpecieResult.color.name"
-      >{{ pokemonGenera }}</span
-    >
-  </div>
-  <div class="grid grid-nogutter justify-content-center">
-    <div class="col-12 lg:col-3 md:col-4 align-self-center">
-      <div class="flex align-items-center justify-content-center">
-        <table>
-          <tr>
-            <td class="text-right font-bold">ID</td>
-            <td>
-              #{{ pokemon.pokemonResult.id | number: '4.0-0' | replaceComma }}
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right font-bold">Height</td>
-            <td>
-              {{ pokemon.pokemonResult.height | pokemonHeight }}
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right font-bold">Weight</td>
-            <td>
-              {{ pokemon.pokemonResult.weight | pokemonWeight }}
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right font-bold">Abilities</td>
-            <td>
-              @for (
-                ability of pokemon.pokemonResult.abilities;
-                track ability.ability.name
-              ) {
-                <span
-                  [ngClass]="
-                    'ability ' +
-                    pokemon.pokemonSpecieResult.color.name +
-                    (ability.is_hidden ? ' hiddenAbility' : '')
-                  "
-                  >{{ ability.ability.name | uppercase }}</span
-                >
-              }
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right font-bold">Types</td>
-            <td>
-              <div class="flex flex-row flex-nowrap">
-                @for (
-                  type of pokemon.pokemonResult.types;
-                  track type.type.name
-                ) {
-                  <div
-                    [class]="
-                      type.type.name +
-                      ' flex icon align-items-center justify-content-start'
-                    "
-                  >
-                    <span class="text-white col-8">
-                      {{ type.type.name | titlecase }}
-                    </span>
-                    <img
-                      class="col-4"
-                      alt=""
-                      src="assets/images/type-icons/png/{{
-                        type.type.name
-                      }}.png"
-                    />
-                  </div>
-                }
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right font-bold">Forms</td>
-            <td>
-              <div class="flex flex-row flex-wrap">
-                @for (
-                  form of pokemon.pokemonSpecieResult.varieties;
-                  track form.pokemon.name
-                ) {
-                  <span
-                    [ngClass]="
-                      'flex variety mt-1 ' +
-                      pokemon.pokemonSpecieResult.color.name +
-                      (form.pokemon.url === selectedForm
-                        ? ' varietySelected'
-                        : '')
-                    "
-                    (click)="changeVariety(form.pokemon.url)"
-                    >{{ form.pokemon.name | uppercase }}</span
-                  >
-                }
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="col-12 lg:col-5 md:col-4">
-      <div class="flex justify-content-center">
-        <img
-          class="w-9"
-          [src]="
-            pokemon.pokemonResult.sprites.other?.['official-artwork']
-              ?.front_default
-          "
-          alt="pokemon"
-        />
-      </div>
-    </div>
-    <div class="col-12 lg:col-3 md:col-4 align-self-center">
-      <div class="flex align-items-center justify-content-center">
-        <table>
-          <tr>
-            <td></td>
-            <td>
-              <button
-                class="btn mx-1"
-                (click)="showStats(selectedStatus.BASE)"
-                [ngClass]="
-                  selectedStat === selectedStatus.BASE
-                    ? pokemon.pokemonSpecieResult.color.name
-                    : null
-                "
-              >
-                Base
-              </button>
-            </td>
-            <td>
-              <button
-                class="btn mx-1"
-                (click)="showStats(selectedStatus.MIN)"
-                [ngClass]="
-                  selectedStat === selectedStatus.MIN
-                    ? pokemon.pokemonSpecieResult.color.name
-                    : null
-                "
-              >
-                Min
-              </button>
-            </td>
-            <td>
-              <button
-                class="btn mx-1"
-                (click)="showStats(selectedStatus.MAX)"
-                [ngClass]="
-                  selectedStat === selectedStatus.MAX
-                    ? pokemon.pokemonSpecieResult.color.name
-                    : null
-                "
-              >
-                Max
-              </button>
-            </td>
-          </tr>
-          @for (
-            pokemonStat of pokemon.pokemonResult.stats;
-            track pokemonStat.stat.name
-          ) {
-            <tr>
-              <td class="text-right font-bold">
-                {{ pokemonStat.stat.name | titlecase }}
-              </td>
-              <td colspan="3">
-                <app-progressbar
-                  *ngIf="
-                    pokemonStat.base_stat
-                      | pokemonStats
-                        : pokemon.pokemonResult.id
-                        : selectedStat
-                        : pokemonStat.stat.name === 'hp' as stat
-                  "
-                  [value]="(stat / this.maxBaseStat) * 100"
-                  [color]="pokemon.pokemonSpecieResult.color.name"
-                  aria-valuenow=""
-                  aria-valuemin="0"
-                  aria-valuemax="255"
-                >
-                  <ng-template pTemplate="content" let-value>
-                    <span>{{ stat }}</span>
-                  </ng-template>
-                </app-progressbar>
-              </td>
-            </tr>
-          }
-        </table>
-      </div>
-    </div>
-  </div>
+  <app-pokemon-detail-main
+    [pokemon]="pokemon"
+    (changeVariety)="changeVariety($event)"
+  ></app-pokemon-detail-main>
 
   <app-pokemon-evolve-chain [pokemon]="pokemon"></app-pokemon-evolve-chain>
+
+  <!-- Typing -->
+  <h1 class="Heading text-center">TYPING</h1>
+  <div class="flex justify-content-center">
+    <table>
+      <tr>
+        <td class="text-right font-bold">0x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from0x) {
+              @for (type of from0x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">0.25x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from025x) {
+              @for (type of from025x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">0.5x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from05x) {
+              @for (type of from05x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">2x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from2x) {
+              @for (type of from2x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">4x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from4x) {
+              @for (type of from4x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 }

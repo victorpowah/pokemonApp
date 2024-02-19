@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy, inject } from '@angular/core'
+import { Component, Input, inject } from '@angular/core'
 import { PokeApiService } from '../../services/poke-api.service'
-import { Subject, map, mergeMap, takeUntil } from 'rxjs'
+import { map, mergeMap, takeUntil } from 'rxjs'
 import {
   FlavorTextEntry,
   PokeApiPokemonSpecieResponse,
@@ -12,15 +12,17 @@ import {
 import { CommonModule, DecimalPipe } from '@angular/common'
 import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
+import { DestroyService } from '../../services/destroy.service'
 
 @Component({
   selector: 'app-pokemon-card',
   standalone: true,
   imports: [CommonModule, DecimalPipe, ReplaceCommaPipe, ProgressSpinnerModule],
+  providers: [DestroyService],
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.scss',
 })
-export class PokemonCardComponent implements OnDestroy {
+export class PokemonCardComponent {
   _pokemonUrl: string = ''
 
   public divide_factor = 10
@@ -45,7 +47,7 @@ export class PokemonCardComponent implements OnDestroy {
 
   private readonly pokeApiService = inject(PokeApiService)
 
-  private destroy$ = new Subject<void>()
+  private destroy$ = inject(DestroyService)
 
   private getPokemon(): void {
     this.pokeApiService
@@ -98,10 +100,5 @@ export class PokemonCardComponent implements OnDestroy {
     this.pokemonText = entry
       ? entry.flavor_text.replace('\n', '').replace('\f', '')
       : ''
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next()
-    this.destroy$.complete()
   }
 }
