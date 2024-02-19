@@ -1,0 +1,44 @@
+.btn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  border-radius: 50rem;
+  padding: 0.375rem 0.75rem;
+}
+
+table td {
+  padding: 0.5rem;
+  vertical-align: middle;
+}
+
+//Type Box
+.icon {
+  border-radius: 4px;
+  height: 30px;
+  width: 90px;
+  filter: saturate(100%) brightness(110%);
+  transition: 200ms all;
+  margin-right: 15px;
+}
+
+.ability,
+.variety,
+.genera {
+  border-radius: 2px;
+  padding: 2px 3px;
+  margin-right: 6px;
+  white-space: nowrap;
+  line-height: initial;
+}
+
+.variety:hover {
+  cursor: pointer;
+}
+
+.hiddenAbility,
+.varietySelected {
+  filter: brightness(110%) saturate(50%);
+}

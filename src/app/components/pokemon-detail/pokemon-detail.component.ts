@@ -8,21 +8,10 @@ import {
 } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PokeApiService } from '../../services/poke-api.service'
-import {
-  PokeApiPokemonResponse,
-  Stat,
-} from '../../models/pokeApi-pokemon-respose.model'
+import { PokeApiPokemonResponse } from '../../models/pokeApi-pokemon-respose.model'
 import { CommonModule, TitleCasePipe } from '@angular/common'
-import { ToastModule } from 'primeng/toast'
-import { SelectedStatus } from '../../models/pokemon-detail/pokemon-detail-const.model'
 import { takeUntil, mergeMap, map, forkJoin } from 'rxjs'
 import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
-import { PokeStatService } from '../../services/poke-stat.service'
-import { ProgressBarComponent } from '../progressbar/progressbar'
-import { PokemonHeightPipe } from '../../pipes/pokemon-height.pipe'
-import { PokemonWeightPipe } from '../../pipes/pokemon-weight.pipe'
-import { ReplaceCommaPipe } from '../../pipes/replace-comma.pipe'
-import { PokemonStatsPipe } from '../../pipes/pokemon-stats.pipe'
 import { ThemeService } from '../../services/theme-service.service'
 import { PokemonEvolveChainComponent } from '../pokemon-evolve-chain/pokemon-evolve-chain.component'
 import { DestroyService } from '../../services/destroy.service'
@@ -30,20 +19,16 @@ import {
   NamedAPIResource,
   PokeApiTypeResponse,
 } from '../../models/pokeApi-type-response.model'
+import { PokemonDetailMainComponent } from '../pokemon-detail-main/pokemon-detail-main.component'
 
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
   imports: [
     CommonModule,
-    ProgressBarComponent,
-    ToastModule,
     TitleCasePipe,
-    PokemonStatsPipe,
-    PokemonHeightPipe,
-    PokemonWeightPipe,
-    ReplaceCommaPipe,
     PokemonEvolveChainComponent,
+    PokemonDetailMainComponent,
   ],
   providers: [DestroyService],
   templateUrl: './pokemon-detail.component.html',
@@ -62,16 +47,6 @@ export class PokemonDetailComponent
     type2: PokeApiTypeResponse
   }
 
-  public maxBaseStat: number = 0
-
-  public selectedStat: SelectedStatus = SelectedStatus.BASE
-
-  public selectedStatus = SelectedStatus
-
-  public pokemonGenera: string = ''
-
-  public selectedForm: string = ''
-
   public from4x!: NamedAPIResource[]
   public from2x!: NamedAPIResource[]
   public from05x!: NamedAPIResource[]
@@ -81,7 +56,6 @@ export class PokemonDetailComponent
   private pokemonId!: number
 
   private readonly pokeApiService = inject(PokeApiService)
-  private readonly pokeStatService = inject(PokeStatService)
   private readonly themeService = inject(ThemeService)
   private destroy$ = inject(DestroyService)
 
@@ -96,15 +70,6 @@ export class PokemonDetailComponent
 
       this.getPokemon()
     })
-
-    this.pokeStatService
-      .getStats()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((stat: number) => {
-        if (stat > this.maxBaseStat) {
-          this.maxBaseStat = stat
-        }
-      })
   }
   ngAfterContentChecked() {
     this.cdref.detectChanges()
@@ -114,15 +79,7 @@ export class PokemonDetailComponent
     this.themeService.setColorClass('bg-gray-900')
   }
 
-  public showStats(stat: SelectedStatus) {
-    this.selectedStat = stat
-    this.maxBaseStat = 0
-  }
-
   public changeVariety(varietyUrl: string) {
-    this.selectedForm = varietyUrl
-    this.maxBaseStat = 0
-
     this.pokeApiService
       .getPokemon(varietyUrl)
       .pipe(takeUntil(this.destroy$))
@@ -190,24 +147,9 @@ export class PokemonDetailComponent
   }
 
   private initializePokemon() {
-    const pokemonGeneraResult = this.pokemon.pokemonSpecieResult.genera.find(
-      (genera) => genera.language.name === 'en'
-    )
-    this.pokemonGenera = pokemonGeneraResult ? pokemonGeneraResult.genus : ''
-
-    this.selectedForm =
-      this.pokemon.pokemonSpecieResult.varieties[0].pokemon.url
-
     this.themeService.setColorClass(this.pokemon.pokemonSpecieResult.color.name)
 
-    this.calculateStats()
     this.calculateTypes()
-  }
-
-  private calculateStats(): void {
-    this.maxBaseStat = Math.max(
-      ...this.pokemon.pokemonResult.stats.map((stat: Stat) => stat.base_stat)
-    )
   }
 
   private calculateTypes(): void {
