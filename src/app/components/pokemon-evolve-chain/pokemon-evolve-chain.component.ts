@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core'
-import { takeUntil, mergeMap, forkJoin, map, Subject } from 'rxjs'
+import { takeUntil, mergeMap, forkJoin, map } from 'rxjs'
 import { PokeApiEvolutionChainResponse } from '../../models/pokeApi-evolution-chain-response.model'
 import { PokeApiPokemonResponse } from '../../models/pokeApi-pokemon-respose.model'
 import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
@@ -7,11 +7,13 @@ import { PokeApiService } from '../../services/poke-api.service'
 import { RouterLink } from '@angular/router'
 import { PokemonEvolutionDescriptionPipe } from '../../pipes/pokemon-evolution-description.pipe'
 import { CommonModule } from '@angular/common'
+import { DestroyService } from '../../services/destroy.service'
 
 @Component({
   selector: 'app-pokemon-evolve-chain',
   standalone: true,
   imports: [CommonModule, RouterLink, PokemonEvolutionDescriptionPipe],
+  providers: [DestroyService],
   templateUrl: './pokemon-evolve-chain.component.html',
   styleUrl: './pokemon-evolve-chain.component.scss',
 })
@@ -43,7 +45,7 @@ export class PokemonEvolveChainComponent {
   public ev3: PokeApiPokemonResponse | undefined
 
   private readonly pokeApiService = inject(PokeApiService)
-  private destroy$ = new Subject<void>()
+  private destroy$ = inject(DestroyService)
 
   private getEvolutionChain(): void {
     this.pokeApiService

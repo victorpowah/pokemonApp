@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { PokeApiInfo } from '../../models/pokeApi-info.model'
 import { PokeApiResponse } from '../../models/pokeApi-response.model'
 import { PokeApiService } from '../../services/poke-api.service'
@@ -7,8 +7,9 @@ import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { PokeApiPokedexResponse } from '../../models/pokeApi-pokedex-response.model'
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component'
-import { Subject, map, mergeMap, takeUntil } from 'rxjs'
+import { map, mergeMap, takeUntil } from 'rxjs'
 import { PaginatorModule, PaginatorState } from 'primeng/paginator'
+import { DestroyService } from '../../services/destroy.service'
 
 @Component({
   selector: 'app-pokedex',
@@ -20,10 +21,11 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator'
     PokemonCardComponent,
     PaginatorModule,
   ],
+  providers: [DestroyService],
   templateUrl: './pokedex.component.html',
   styleUrl: './pokedex.component.scss',
 })
-export class PokedexComponent implements OnInit, OnDestroy {
+export class PokedexComponent implements OnInit {
   public selectedPokedex: PokeApiPokedexResponse | undefined
   public selectedPokedexDrop: PokeApiInfo | undefined
 
@@ -37,7 +39,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
 
   private readonly pokeApiService = inject(PokeApiService)
 
-  private destroy$ = new Subject<void>()
+  private destroy$ = inject(DestroyService)
 
   ngOnInit(): void {
     this.pokeApiService
@@ -68,11 +70,6 @@ export class PokedexComponent implements OnInit, OnDestroy {
           this.selectedPokedexDrop = this.pokedexs[0]
         }
       )
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next()
-    this.destroy$.complete()
   }
 
   public changePokedex(event: DropdownChangeEvent): void {

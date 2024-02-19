@@ -200,4 +200,95 @@
   </div>
 
   <app-pokemon-evolve-chain [pokemon]="pokemon"></app-pokemon-evolve-chain>
+
+  <h1 class="Heading text-center">TYPING</h1>
+  <div class="flex justify-content-center">
+    <table>
+      <tr>
+        <td class="text-right font-bold">0x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from0x) {
+              @for (type of from0x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">0.25x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from025x) {
+              @for (type of from025x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">0.5x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from05x) {
+              @for (type of from05x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">2x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from2x) {
+              @for (type of from2x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-weight-bold">4x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from4x) {
+              @for (type of from4x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
+              }
+            }
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 }
