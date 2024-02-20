@@ -1,102 +1,261 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 @if (pokemon) {
-  <app-pokemon-detail-main
-    [pokemon]="pokemon"
-    (changeVariety)="changeVariety($event)"
-  ></app-pokemon-detail-main>
+<app-pokemon-detail-main
+  [pokemon]="pokemon"
+  (changeVariety)="changeVariety($event)"
+></app-pokemon-detail-main>
 
-  <app-pokemon-evolve-chain [pokemon]="pokemon"></app-pokemon-evolve-chain>
+<app-pokemon-evolve-chain [pokemon]="pokemon"></app-pokemon-evolve-chain>
 
-  <!-- Typing -->
-  <h1 class="Heading text-center">TYPING</h1>
-  <div class="flex justify-content-center">
+<!-- Training -->
+
+<div class="flex justify-content-center gap-8 flex-wrap">
+  <div
+    class="flex align-items-center justify-content-center bg-blue-100 p-2 border-round-lg"
+  >
     <table>
       <tr>
-        <td class="text-right font-bold">0x</td>
+        <th><h1 class="Heading text-center">TRAINING</h1></th>
+      </tr>
+      <tr>
+        <td class="font-medium">EV yield</td>
+        <td
+          [innerHTML]="
+            {
+              stats: pokemon.pokemonResult.stats,
+              colorName: pokemon.pokemonSpecieResult.color.name
+            } | StatsEv
+          "
+        ></td>
+      </tr>
+      <tr>
+        <td><span class="font-medium">Catch Rate</span></td>
         <td>
-          <div class="typeDefencesRow" style="padding: 0">
-            @if (from0x) {
-              @for (type of from0x; track type.name) {
-                <div [ngClass]="'icon ' + type.name">
-                  <img
-                    alt=""
-                    src="assets/images/type-icons/png/{{ type.name }}.png"
-                  />
-                </div>
-              }
-            }
-          </div>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name
+            "
+          >
+            {{ pokemon.pokemonSpecieResult.capture_rate }}</span
+          >
+
+          {{ pokemon.pokemonSpecieResult.capture_rate | catchRate }}
         </td>
       </tr>
       <tr>
-        <td class="text-right font-weight-bold">0.25x</td>
+        <td class="font-medium">Base Friendship</td>
         <td>
-          <div class="typeDefencesRow" style="padding: 0">
-            @if (from025x) {
-              @for (type of from025x; track type.name) {
-                <div [ngClass]="'icon ' + type.name">
-                  <img
-                    alt=""
-                    src="assets/images/type-icons/png/{{ type.name }}.png"
-                  />
-                </div>
-              }
-            }
-          </div>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name
+            "
+          >
+            {{ pokemon.pokemonSpecieResult.base_happiness }}</span
+          >
+          {{ pokemon.pokemonSpecieResult.base_happiness | baseFriendship }}
         </td>
       </tr>
       <tr>
-        <td class="text-right font-weight-bold">0.5x</td>
+        <td class="font-medium">Base Exp.</td>
         <td>
-          <div class="typeDefencesRow" style="padding: 0">
-            @if (from05x) {
-              @for (type of from05x; track type.name) {
-                <div [ngClass]="'icon ' + type.name">
-                  <img
-                    alt=""
-                    src="assets/images/type-icons/png/{{ type.name }}.png"
-                  />
-                </div>
-              }
-            }
-          </div>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name
+            "
+          >
+            {{ pokemon.pokemonResult.base_experience }}</span
+          >
         </td>
       </tr>
       <tr>
-        <td class="text-right font-weight-bold">2x</td>
+        <td class="font-medium">Growth Rate</td>
         <td>
-          <div class="typeDefencesRow" style="padding: 0">
-            @if (from2x) {
-              @for (type of from2x; track type.name) {
-                <div [ngClass]="'icon ' + type.name">
-                  <img
-                    alt=""
-                    src="assets/images/type-icons/png/{{ type.name }}.png"
-                  />
-                </div>
-              }
-            }
-          </div>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name
+            "
+            >{{ pokemon.pokemonSpecieResult.growth_rate.name }}</span
+          >
+          <span>
+            ({{ pokemon.pokemonSpecieResult.growth_rate.name | growExp }}
+            Exp.)
+          </span>
         </td>
       </tr>
       <tr>
-        <td class="text-right font-weight-bold">4x</td>
+        <td class="font-medium">Held items</td>
         <td>
-          <div class="typeDefencesRow" style="padding: 0">
-            @if (from4x) {
-              @for (type of from4x; track type.name) {
-                <div [ngClass]="'icon ' + type.name">
-                  <img
-                    alt=""
-                    src="assets/images/type-icons/png/{{ type.name }}.png"
-                  />
-                </div>
-              }
+          <span>
+            @if(pokemon.pokemonResult.held_items.length===0){ None }@else {
+            {{ pokemon.pokemonResult.held_items | heldItems | titlecase }}
             }
-          </div>
+          </span>
         </td>
       </tr>
     </table>
   </div>
+  <div class="flex align-items-center justify-content-center">
+    <!-- Breeding -->
+    <table>
+      <tr>
+        <th><h1 class="Heading text-center">BREEDING</h1></th>
+      </tr>
+      <tr>
+        <td class="font-medium">Egg Groups</td>
+        <td>
+          @for(eggGroup of pokemon.pokemonSpecieResult.egg_groups; track
+          eggGroup){
+          <span class="text-600">{{ eggGroup.name | titlecase }} </span>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td><span class="font-medium">Gender</span></td>
+        <td>
+          <span
+            [innerHTML]="pokemon.pokemonSpecieResult.gender_rate | gender"
+          ></span>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-medium">Base Friendship</td>
+        <td>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name
+            "
+          >
+            {{ pokemon.pokemonSpecieResult.base_happiness }}</span
+          >
+          {{ pokemon.pokemonSpecieResult.base_happiness | baseFriendship }}
+        </td>
+      </tr>
+      <tr>
+        <td class="font-medium">Egg Cycles</td>
+        <td>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name
+            "
+            >{{ pokemon.pokemonSpecieResult.hatch_counter }}</span
+          >
+
+          {{
+            '(' + pokemon.pokemonSpecieResult.hatch_counter * 256 + ' Steps)'
+          }}
+        </td>
+      </tr>
+      <tr>
+        <th><h1 class="Heading">FORMS</h1></th>
+      </tr>
+      <tr>
+        <td class="font-medium">Alternative Forms:</td>
+        <td class="">
+          {{ pokemon.pokemonResult.forms.length - 1 === 0 ? 'No' : 'Yes' }}
+        </td>
+      </tr>
+      <tr>
+        <td class="font-medium">Gender Differences:</td>
+        <td class="">
+          {{
+            pokemon.pokemonSpecieResult.has_gender_differences ? 'Yes' : 'No'
+          }}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="flex align-items-center justify-content-center">
+    <!-- Typing -->
+    <th>
+      <table>
+        <tr>
+          <th><h1 class="Heading">TYPING</h1></th>
+        </tr>
+        <tr>
+          <td class="font-bold">0x</td>
+          <td>
+            <div class="typeDefencesRow" style="padding: 0">
+              @if (from0x) { @for (type of from0x; track type.name) {
+              <div [ngClass]="'icon ' + type.name">
+                <img
+                  alt=""
+                  src="assets/images/type-icons/png/{{ type.name }}.png"
+                />
+              </div>
+              } }
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">0.25x</td>
+          <td>
+            <div class="typeDefencesRow" style="padding: 0">
+              @if (from025x) { @for (type of from025x; track type.name) {
+              <div [ngClass]="'icon ' + type.name">
+                <img
+                  alt=""
+                  src="assets/images/type-icons/png/{{ type.name }}.png"
+                />
+              </div>
+              } }
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">0.5x</td>
+          <td>
+            <div class="typeDefencesRow" style="padding: 0">
+              @if (from05x) { @for (type of from05x; track type.name) {
+              <div [ngClass]="'icon ' + type.name">
+                <img
+                  alt=""
+                  src="assets/images/type-icons/png/{{ type.name }}.png"
+                />
+              </div>
+              } }
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">2x</td>
+          <td>
+            <div class="typeDefencesRow" style="padding: 0">
+              @if (from2x) { @for (type of from2x; track type.name) {
+              <div [ngClass]="'icon ' + type.name">
+                <img
+                  alt=""
+                  src="assets/images/type-icons/png/{{ type.name }}.png"
+                />
+              </div>
+              } }
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">4x</td>
+          <td>
+            <div class="typeDefencesRow" style="padding: 0">
+              @if (from4x) { @for (type of from4x; track type.name) {
+              <div [ngClass]="'icon ' + type.name">
+                <img
+                  alt=""
+                  src="assets/images/type-icons/png/{{ type.name }}.png"
+                />
+              </div>
+              } }
+            </div>
+          </td>
+        </tr>
+      </table>
+    </th>
+  </div>
+</div>
+
 }

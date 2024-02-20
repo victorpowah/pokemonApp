@@ -20,6 +20,12 @@ import {
   PokeApiTypeResponse,
 } from '../../models/pokeApi-type-response.model'
 import { PokemonDetailMainComponent } from '../pokemon-detail-main/pokemon-detail-main.component'
+import { PokemonCatchRate } from '../../pipes/pokemon-catch-rate.pipe'
+import { PokemonStatsEv } from '../../pipes/pokemon-stats-ev.pipe'
+import { PokemonBaseFriendship } from '../../pipes/pokemon-base-friendship.pipe'
+import { PokemonGrowExp } from '../../pipes/pokemon-grow-exp.pipe'
+import { PokemonheldItems } from '../../pipes/pokemon-held-items.pipe'
+import { PokemonGender } from '../../pipes/pokemon-gender.pipe'
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -29,6 +35,12 @@ import { PokemonDetailMainComponent } from '../pokemon-detail-main/pokemon-detai
     TitleCasePipe,
     PokemonEvolveChainComponent,
     PokemonDetailMainComponent,
+    PokemonCatchRate,
+    PokemonStatsEv,
+    PokemonBaseFriendship,
+    PokemonGrowExp,
+    PokemonheldItems,
+    PokemonGender,
   ],
   providers: [DestroyService],
   templateUrl: './pokemon-detail.component.html',
