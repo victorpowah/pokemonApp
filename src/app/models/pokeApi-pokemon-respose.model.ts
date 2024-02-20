@@ -171,3 +171,23 @@ export interface Type {
   slot: number
   type: Species
 }
+
+interface Version {
+  name: string
+  url: string
+}
+
+interface VersionDetail {
+  rarity: number
+  version: Version
+}
+
+interface Item {
+  name: string
+  url: string
+}
+
+export interface HeldItem {
+  item: Item
+  version_details: VersionDetail[]
+}
