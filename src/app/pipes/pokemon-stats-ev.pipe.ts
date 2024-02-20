@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { Stat } from '../models/pokeApi-pokemon-respose.model'
-import { PokeApiPokemonSpecieResponse } from '../models/pokeApi-pokemon-specie-response.model'
 @Pipe({ name: 'StatsEv', standalone: true })
-export class PokemonStatsEv implements PipeTransform {
+export class PokemonStatsEvPipe implements PipeTransform {
   transform(data: { stats: Stat[]; colorName: string } | null): string {
     if (!data) {
       return ''
@@ -14,7 +13,7 @@ export class PokemonStatsEv implements PipeTransform {
       .filter((stat) => stat.effort > 0)
       .map(
         (stat) =>
-          `<span class='${colorName} text border-round-lg px-2'>${stat.effort}</span> ${stat.stat.name}`
+          `<span class='${colorName}-text text border-round-lg px-2'>${stat.effort}</span> ${stat.stat.name[0].toUpperCase() + stat.stat.name.substring(1)}`
       )
       .join(' ')
 

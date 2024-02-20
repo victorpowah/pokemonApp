@@ -1,0 +1,37 @@
+.typeDefencesRow {
+  text-align: center;
+  margin: 0;
+
+  .icon {
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    transition: 200ms all;
+    margin: 5px;
+    display: inline-flex;
+  }
+
+  .icon:hover {
+    filter: saturate(200%);
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  .icon img {
+    height: 60%;
+    width: 60%;
+    margin: 20%;
+  }
+}
+
+.typingTable {
+  border-collapse: collapse;
+
+  tr:first-child {
+    border: none;
+  }
+
+  tr {
+    border-top: 1px solid #dee2e6;
+  }
+}

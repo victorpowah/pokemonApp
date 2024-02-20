@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({ name: 'gender', standalone: true })
-export class PokemonGender implements PipeTransform {
+export class PokemonGenderPipe implements PipeTransform {
   transform(value: number | null): string {
     if (!value) {
       return ''
@@ -52,10 +52,10 @@ export class PokemonGender implements PipeTransform {
         femaleRate = '100'
     }
     return (
-      '<span class="text-pink-300">' +
+      '<span class="text-indigo-600">' +
       maleRate +
       '% M, </span>' +
-      '<span class="text-indigo-600">' +
+      '<span class="text-pink-300">' +
       femaleRate +
       '% F</span> '
     )
