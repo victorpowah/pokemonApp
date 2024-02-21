@@ -10,6 +10,8 @@ import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component'
 import { map, mergeMap, takeUntil } from 'rxjs'
 import { PaginatorModule, PaginatorState } from 'primeng/paginator'
 import { DestroyService } from '../../services/destroy.service'
+import { InputTextModule } from 'primeng/inputtext'
+import { PokemonFilterPipe } from '../../pipes/pokemon-filter.pipe'
 
 @Component({
   selector: 'app-pokedex',
@@ -20,6 +22,8 @@ import { DestroyService } from '../../services/destroy.service'
     DropdownModule,
     PokemonCardComponent,
     PaginatorModule,
+    InputTextModule,
+    PokemonFilterPipe,
   ],
   providers: [DestroyService],
   templateUrl: './pokedex.component.html',
@@ -36,6 +40,8 @@ export class PokedexComponent implements OnInit {
   public first: number = 0
 
   public rows: number = 20
+
+  public pokemonFilter: string = ''
 
   private readonly pokeApiService = inject(PokeApiService)
 
@@ -89,7 +95,9 @@ export class PokedexComponent implements OnInit {
   public onPageChange(event: PaginatorState): void {
     this.first = event.first ? event.first : 0
     this.rows = event.rows ? event.rows : 0
+  }
 
-    console.log(event)
+  public changeRow() {
+    this.first = 0
   }
 }
