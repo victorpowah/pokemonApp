@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({ name: 'catchRate', standalone: true })
-export class PokemonCatchRate implements PipeTransform {
+export class PokemonCatchRatePipe implements PipeTransform {
   transform(value: number | null): string {
     if (!value) {
       return ''

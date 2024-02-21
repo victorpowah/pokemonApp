@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { HeldItem } from '../models/pokeApi-pokemon-respose.model'
 @Pipe({ name: 'heldItems', standalone: true })
-export class PokemonheldItems implements PipeTransform {
+export class PokemonheldItemsPipe implements PipeTransform {
   transform(items: HeldItem[]): string {
     if (!items) {
       return ''

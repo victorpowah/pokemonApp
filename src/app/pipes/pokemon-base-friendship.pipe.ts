@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({ name: 'baseFriendship', standalone: true })
-export class PokemonBaseFriendship implements PipeTransform {
+export class PokemonBaseFriendshipPipe implements PipeTransform {
   transform(value: number | null): string {
     if (!value) {
       return ''
