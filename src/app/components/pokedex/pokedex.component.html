@@ -13,46 +13,60 @@
   </div>
 
   @if (pokedexs) {
-    <p-dropdown
-      class="flex justify-content-center align-items-center mt-4 mb-4"
-      [options]="pokedexs"
-      [(ngModel)]="selectedPokedexDrop"
-      (onChange)="changePokedex($event)"
-      optionLabel="name"
-      [showClear]="true"
-      [filter]="true"
-      filterBy="name"
-      name="selectedPokedexs"
-      placeholder="Select a pokedex"
-    ></p-dropdown>
+    <div class="flex justify-content-center align-items-center mt-4 mb-4">
+      <p-dropdown
+        [options]="pokedexs"
+        [(ngModel)]="selectedPokedexDrop"
+        (onChange)="changePokedex($event)"
+        optionLabel="name"
+        [showClear]="true"
+        [filter]="true"
+        filterBy="name"
+        name="selectedPokedexs"
+        placeholder="Select a pokedex"
+      ></p-dropdown>
+      <span class="p-input-icon-right mx-2">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="pokemonFilter"
+          (ngModelChange)="changeRow()"
+        />
+      </span>
+    </div>
   }
 </div>
 
 @if (selectedPokedex) {
-  <div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
-    @for (
-      pokemonEntry of selectedPokedex.pokemon_entries
-        | slice: first : first + rows;
-      track pokemonEntry.entry_number
-    ) {
-      <app-pokemon-card
-        class="flex w-14rem h-25rem align-items-center justify-content-center"
-        [pokemonUrl]="pokemonEntry.pokemon_species.url"
-      ></app-pokemon-card>
-    } @empty {
-      <div>
-        <h2>No pokedex selected</h2>
-      </div>
-    }
-  </div>
+  @if (
+    selectedPokedex.pokemon_entries | pokemonFilter: pokemonFilter;
+    as pokemonEntries
+  ) {
+    <div class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center">
+      @for (
+        pokemonEntry of pokemonEntries | slice: first : first + rows;
+        track pokemonEntry.entry_number
+      ) {
+        <app-pokemon-card
+          class="flex w-14rem h-25rem align-items-center justify-content-center"
+          [pokemonUrl]="pokemonEntry.pokemon_species.url"
+        ></app-pokemon-card>
+      } @empty {
+        <div>
+          <h2>No pokedex selected</h2>
+        </div>
+      }
+    </div>
 
-  <div class="flex justify-content-center">
-    <p-paginator
-      (onPageChange)="onPageChange($event)"
-      [first]="first"
-      [rows]="rows"
-      [totalRecords]="selectedPokedex.pokemon_entries.length"
-      [rowsPerPageOptions]="[10, 20, 30]"
-    ></p-paginator>
-  </div>
+    <div class="flex justify-content-center">
+      <p-paginator
+        (onPageChange)="onPageChange($event)"
+        [first]="first"
+        [rows]="rows"
+        [totalRecords]="pokemonEntries.length"
+        [rowsPerPageOptions]="[10, 20, 30]"
+      ></p-paginator>
+    </div>
+  }
 }
