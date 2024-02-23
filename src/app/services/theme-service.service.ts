@@ -6,6 +6,8 @@ import { BehaviorSubject, Observable } from 'rxjs'
   providedIn: 'root',
 })
 export class ThemeService {
+  private theme: string = 'light'
+
   constructor(@Inject(DOCUMENT) private document: Document) {
     const themeLink = this.document.getElementById(
       'app-theme'
@@ -22,6 +24,7 @@ export class ThemeService {
     ) as HTMLLinkElement
 
     if (themeLink) {
+      this.theme = theme
       themeLink.href = `bootstrap4-${theme}-purple.css`
     }
   }
@@ -30,11 +33,15 @@ export class ThemeService {
     'bg-gray-900'
   )
 
-  getColorClass(): Observable<string> {
+  public getColorClass(): Observable<string> {
     return this.colorClass$.asObservable()
   }
 
-  setColorClass(stat: string) {
+  public setColorClass(stat: string) {
     this.colorClass$.next(stat)
+  }
+
+  public isDarkMode(): boolean {
+    return this.theme === 'dark'
   }
 }

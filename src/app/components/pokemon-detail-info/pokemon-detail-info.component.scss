@@ -35,3 +35,65 @@
     border-top: 1px solid #dee2e6;
   }
 }
+
+.bg-black {
+  background-color: #607d8b6e !important;
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #607d8b6e;
+}
+
+.bg-blue {
+  background-color: #81d4fa4d !important;
+
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #81d4fa4d;
+}
+
+.bg-brown {
+  background-color: #bcaaa46a !important;
+
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #bcaaa46a;
+}
+
+.bg-gray {
+  background-color: #a6a6a65f !important;
+
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #a6a6a65f;
+}
+
+.bg-green {
+  background-color: #81c78460 !important;
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+}
+
+.bg-pink {
+  background-color: #f8bbd04d !important;
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #f8bbd04d;
+}
+
+.bg-purple {
+  background-color: #ad8ee755 !important;
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #ad8ee755;
+}
+
+.bg-red {
+  background-color: #ff8b8053 !important;
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #ff8b8053;
+}
+
+.bg-white {
+  background-color: #d5dbe148 !important;
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #d5dbe148;
+}
+
+.bg-yellow {
+  background-color: #ffd50083 !important;
+  transition: background-color 1000ms ease-in, width 1500ms ease-in-out;
+  box-shadow: 0 0 12px #ffd50083;
+}
