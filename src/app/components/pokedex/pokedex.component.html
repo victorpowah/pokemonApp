@@ -7,9 +7,7 @@
     />
   </div>
   <div class="flex justify-content-center align-items-center mt-4">
-    <span
-      >Explore Pokémon cities with our Pokédex and assemble your own team.</span
-    >
+    <span>{{ 'POKEDEX.SPAN' | translate }}</span>
   </div>
 
   @if (pokedexs) {
@@ -51,7 +49,7 @@ pokemonFilter; as pokemonEntries ) {
   ></app-pokemon-card>
   } @empty {
   <div>
-    <h2>No pokedex selected</h2>
+    <h2>{{ 'POKEDEX.NO_SELECTED' | translate }}</h2>
   </div>
   }
 </div>

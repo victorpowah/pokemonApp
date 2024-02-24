@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common'
 import { NamedAPIResource } from '../../models/pokeApi-evolution-chain-response.model'
 import { PokeApiTypeResponse } from '../../models/pokeApi-type-response.model'
 import { ThemeService } from '../../services/theme-service.service'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-pokemon-detail-info',
@@ -23,6 +24,7 @@ import { ThemeService } from '../../services/theme-service.service'
     PokemonGrowExpPipe,
     PokemonheldItemsPipe,
     PokemonGenderPipe,
+    TranslateModule,
   ],
   templateUrl: './pokemon-detail-info.component.html',
   styleUrl: './pokemon-detail-info.component.scss',

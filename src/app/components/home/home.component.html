@@ -23,21 +23,23 @@
         class="surface-900 text-0 p-2 mx-auto mb-4"
         style="max-width: 300px; border-radius: 40px"
       >
-        🔥 Check your favorite pokemons
+        {{ 'HOME.SPAN' | translate }}
       </div>
       <div>
         <h1>
-          <span class="text-6xl text-900 font-bold text-gray-900"
-            >The platform for</span
-          >
+          <span class="text-6xl text-900 font-bold text-gray-900">{{
+            'HOME.TITLE_1' | translate
+          }}</span>
         </h1>
         <h1>
-          <span class="text-6xl text-white font-bold mb-4">Pokemon Fans</span>
+          <span class="text-6xl text-white font-bold mb-4">{{
+            'HOME.TITLE_2' | translate
+          }}</span>
         </h1>
       </div>
       <p-button
         type="button"
-        label="Get Started"
+        label="{{ 'HOME.BUTTON_START' | translate }}"
         [raised]="true"
         class="text-white"
         styleClass="bg-gray-800  border-black-alpha-70 text-white p-3"
@@ -55,9 +57,11 @@
     <div class="grid">
       <div class="col-12 md:col-6">
         <div class="pr-0 md:pr-8">
-          <h3 class="text-900 font-bold text-4xl mb-3">Easy to Use</h3>
+          <h3 class="text-900 font-bold text-4xl mb-3">
+            {{ 'HOME.TITLE_SECTION' | translate }}
+          </h3>
           <div class="text-700 line-height-3 mb-5">
-            You can see your favorite pokemons in detail
+            {{ 'HOME.SUBTITLE_SECTION' | translate }}
           </div>
           <div class="mb-5 flex">
             <div
@@ -84,13 +88,11 @@
               ></div>
             </div>
             <div class="ml-3">
-              <div class="font-medium text-900 mb-2">Pokedex</div>
+              <div class="font-medium text-900 mb-2">
+                {{ 'HOME.POKEDEX_TITLE' | translate }}
+              </div>
               <span class="line-height-3 text-700"
-                >The Pokédex stands as an indispensable tool for Pokémon
-                Trainers on their journey to become Pokémon Masters. Resembling
-                a compact handheld device, it serves as a comprehensive
-                database, cataloging information on various Pokémon species
-                encountered throughout the world.</span
+                >{{ 'HOME.POKEDEX_TEXT' | translate }}.</span
               >
             </div>
           </div>
@@ -117,14 +119,12 @@
               ></div>
             </div>
             <div class="ml-3">
-              <div class="font-medium text-900 mb-2">Pokemon details</div>
-              <span class="line-height-3 text-700"
-                >With the Pokémon Detail Description Page as your guide, you'll
-                embark on an exciting journey of discovery, uncovering the
-                mysteries and marvels of Pokémon species from every region.
-                Whether you're a seasoned trainer or a curious newcomer, let the
-                adventure begin!</span
-              >
+              <div class="font-medium text-900 mb-2">
+                {{ 'HOME.POKEMON_DETAILS_TITLE' | translate }}
+              </div>
+              <span class="line-height-3 text-700">{{
+                'HOME.POKEMON_DETAILS_TEXT' | translate
+              }}</span>
             </div>
           </div>
           <div class="mb-5 flex">
@@ -151,15 +151,12 @@
               ></div>
             </div>
             <div class="ml-3">
-              <div class="font-medium text-900 mb-2">Pokemon item list</div>
-              <span class="line-height-3 text-700"
-                >Welcome to the Pokémon Item List Description Page, your
-                comprehensive catalog of essential items found throughout the
-                Pokémon universe. Below, you'll find descriptions of various
-                items, categorized by their utility and purpose. Let's explore
-                the diverse range of items available to aid trainers on their
-                journey.</span
-              >
+              <div class="font-medium text-900 mb-2">
+                {{ 'HOME.ITEMS_TITLE' | translate }}
+              </div>
+              <span class="line-height-3 text-700">
+                {{ 'HOME.ITEMS_TEXT' | translate }}
+              </span>
             </div>
           </div>
         </div>
