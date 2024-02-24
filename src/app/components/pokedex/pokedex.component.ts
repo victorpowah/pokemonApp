@@ -12,6 +12,7 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator'
 import { DestroyService } from '../../services/destroy.service'
 import { InputTextModule } from 'primeng/inputtext'
 import { PokemonFilterPipe } from '../../pipes/pokemon-filter.pipe'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-pokedex',
@@ -24,6 +25,7 @@ import { PokemonFilterPipe } from '../../pipes/pokemon-filter.pipe'
     PaginatorModule,
     InputTextModule,
     PokemonFilterPipe,
+    TranslateModule,
   ],
   providers: [DestroyService],
   templateUrl: './pokedex.component.html',
