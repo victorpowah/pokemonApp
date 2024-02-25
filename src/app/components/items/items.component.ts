@@ -6,13 +6,19 @@ import { ButtonModule } from 'primeng/button'
 import { ItemCardComponent } from '../item-card/item-card.component'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { DestroyService } from '../../services/destroy.service'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-items',
   standalone: true,
   templateUrl: './items.component.html',
   styleUrl: './items.component.scss',
-  imports: [ButtonModule, ItemCardComponent, ProgressSpinnerModule],
+  imports: [
+    ButtonModule,
+    ItemCardComponent,
+    ProgressSpinnerModule,
+    TranslateModule,
+  ],
   providers: [DestroyService],
 })
 export class ItemsComponent implements OnInit {

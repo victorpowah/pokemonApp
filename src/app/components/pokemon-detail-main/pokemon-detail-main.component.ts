@@ -22,6 +22,7 @@ import { DestroyService } from '../../services/destroy.service'
 import { PokeStatService } from '../../services/poke-stat.service'
 import { ProgressBarComponent } from '../progressbar/progressbar'
 import { ToastModule } from 'primeng/toast'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-pokemon-detail-main',
@@ -34,6 +35,7 @@ import { ToastModule } from 'primeng/toast'
     ReplaceCommaPipe,
     ProgressBarComponent,
     ToastModule,
+    TranslateModule,
   ],
   templateUrl: './pokemon-detail-main.component.html',
   styleUrl: './pokemon-detail-main.component.scss',

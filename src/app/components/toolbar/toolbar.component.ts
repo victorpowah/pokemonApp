@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router'
 import { DestroyService } from '../../services/destroy.service'
 import { takeUntil } from 'rxjs'
 import { CommonModule } from '@angular/common'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-toolbar',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common'
     RouterLink,
     RouterLinkActive,
     CommonModule,
+    TranslateModule,
   ],
   providers: [DestroyService],
   templateUrl: './toolbar.component.html',

@@ -7,10 +7,6 @@
     class="flex align-items-center justify-content-center"
     [itemUrl]="item.url"
   ></app-item-card>
-  } @empty {
-  <div>
-    <h2>No pokedex selected</h2>
-  </div>
   }
 </div>
 <div class="flex justify-content-center flex-wrap gap-2">
@@ -21,7 +17,7 @@
     label="Previus"
     styleClass="bg-gray-800  border-black-alpha-70 text-white "
   ></p-button>
-  <p>Page: {{ page }}</p>
+  <p>{{ 'ITEMS.PAGE' | translate }} {{ page }}</p>
   <p-button
     class="flex align-items-center justify-content-center font-bold border-black-alpha-70"
     [disabled]="!items.next"

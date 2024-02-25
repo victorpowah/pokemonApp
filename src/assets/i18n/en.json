@@ -36,6 +36,21 @@
     "QUARTER_DAMAGE": "0.25x",
     "HALF_DAMAGE": "0.5x",
     "DOUBLE_DAMAGE": "2x",
-    "QUADRUPLE_DAMAGE": "4x"
+    "QUADRUPLE_DAMAGE": "4x",
+    "ID": "ID",
+    "HEIGHT": "Height",
+    "WEIGHT": "Weight",
+    "ABILITIES": "Abilities",
+    "BASE": "Base",
+    "TYPES": "Types",
+    "MIN": "Min",
+    "MAX": "Max",
+    "NO_EVOL": "This Pokémon does not evolve."
+  },
+  "TOOLBAR": {
+    "ITEMS": "Items"
+  },
+  "ITEMS": {
+    "PAGE": "Page:"
   }
 }

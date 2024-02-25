@@ -8,133 +8,130 @@
   class="flex flex-row flex-wrap align-content-center justify-content-center gap-8"
 >
   @if (ev1 && ev1.id) {
-    <div class="evo-div" style="padding: 10px">
-      @if (!ev2?.id && !ev3?.id) {
-        <div class="DNE">This Pokémon does not evolve.</div>
+  <div class="evo-div" style="padding: 10px">
+    @if (!ev2?.id && !ev3?.id) {
+    <div class="DNE">
+      {{ 'POKEMON_DETAIL.NO_EVOL' | translate }}
+    </div>
+    }
+    <img
+      class="evo-img"
+      [routerLink]="['/pokemon', ev1.id]"
+      [src]="ev1.sprites.other?.['official-artwork']?.front_default"
+      alt="ev1"
+    />
+    <div class="evo-id text-center">#{{ ev1.id }}</div>
+    <div
+      class="evo-name text-center"
+      style="padding: 0; bottom: 0"
+      [routerLink]="['/pokemon', ev1.id]"
+    >
+      <span
+        [ngClass]="
+          'evo-name ' +
+          pokemon.pokemonSpecieResult.color.name +
+          (ev1.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
+        "
+        >{{ ev1.name | uppercase }}</span
+      >
+    </div>
+    <div class="flex align-content-center justify-content-center">
+      @for (type of ev1.types; track type.type.name) {
+      <div [ngClass]="'evo-icon ' + type.type.name">
+        <img
+          class=""
+          alt=""
+          src="assets/images/type-icons/png/{{ type.type.name }}.png"
+        />
+      </div>
       }
-      <img
-        class="evo-img"
-        [routerLink]="['/pokemon', ev1.id]"
-        [src]="ev1.sprites.other?.['official-artwork']?.front_default"
-        alt="ev1"
-      />
-      <div class="evo-id text-center">#{{ ev1.id }}</div>
-      <div
-        class="evo-name text-center"
-        style="padding: 0; bottom: 0"
-        [routerLink]="['/pokemon', ev1.id]"
-      >
-        <span
-          [ngClass]="
-            'evo-name ' +
-            pokemon.pokemonSpecieResult.color.name +
-            (ev1.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
-          "
-          >{{ ev1.name | uppercase }}</span
-        >
-      </div>
-      <div class="flex align-content-center justify-content-center">
-        @for (type of ev1.types; track type.type.name) {
-          <div [ngClass]="'evo-icon ' + type.type.name">
-            <img
-              class=""
-              alt=""
-              src="assets/images/type-icons/png/{{ type.type.name }}.png"
-            />
-          </div>
-        }
-      </div>
     </div>
+  </div>
+  } @if (ev2 && ev2.id) { @if (evolutionChain) {
+  <div class="arrow-div evo-desc">
+    <img alt="" src="assets/images/right-arrow.png" class="evo-arrow" />
+    {{
+      evolutionChain.chain.evolves_to[0].evolution_details[0]
+        | pokemonEvolutionDescription
+    }}
+  </div>
   }
-  @if (ev2 && ev2.id) {
-    @if (evolutionChain) {
-      <div class="arrow-div evo-desc">
-        <img alt="" src="assets/images/right-arrow.png" class="evo-arrow" />
-        {{
-          evolutionChain.chain.evolves_to[0].evolution_details[0]
-            | pokemonEvolutionDescription
-        }}
-      </div>
-    }
-    <div class="evo-div">
-      <img
-        class="evo-img"
-        [routerLink]="['/pokemon', ev2.id]"
-        [src]="ev2.sprites.other?.['official-artwork']?.front_default"
-        alt="ev2"
-      />
-      <div class="evo-id text-center">#{{ ev2.id }}</div>
-      <div
-        class="evo-name text-center"
-        style="padding: 0; bottom: 0"
-        [routerLink]="['/pokemon', ev2.id]"
+  <div class="evo-div">
+    <img
+      class="evo-img"
+      [routerLink]="['/pokemon', ev2.id]"
+      [src]="ev2.sprites.other?.['official-artwork']?.front_default"
+      alt="ev2"
+    />
+    <div class="evo-id text-center">#{{ ev2.id }}</div>
+    <div
+      class="evo-name text-center"
+      style="padding: 0; bottom: 0"
+      [routerLink]="['/pokemon', ev2.id]"
+    >
+      <span
+        [ngClass]="
+          'evo-name ' +
+          pokemon.pokemonSpecieResult.color.name +
+          (ev2.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
+        "
+        >{{ ev2.name | uppercase }}</span
       >
-        <span
-          [ngClass]="
-            'evo-name ' +
-            pokemon.pokemonSpecieResult.color.name +
-            (ev2.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
-          "
-          >{{ ev2.name | uppercase }}</span
-        >
-      </div>
-      <div class="flex align-content-center justify-content-center">
-        @for (type of ev2.types; track type.type.name) {
-          <div [ngClass]="'evo-icon ' + type.type.name">
-            <img
-              class=""
-              alt=""
-              src="assets/images/type-icons/png/{{ type.type.name }}.png"
-            />
-          </div>
-        }
-      </div>
     </div>
+    <div class="flex align-content-center justify-content-center">
+      @for (type of ev2.types; track type.type.name) {
+      <div [ngClass]="'evo-icon ' + type.type.name">
+        <img
+          class=""
+          alt=""
+          src="assets/images/type-icons/png/{{ type.type.name }}.png"
+        />
+      </div>
+      }
+    </div>
+  </div>
+  } @if (ev3 && ev3.id) { @if (evolutionChain) {
+  <div class="arrow-div evo-desc">
+    <img alt="" src="assets/images/right-arrow.png" class="evo-arrow" />
+    {{
+      evolutionChain.chain.evolves_to[0].evolves_to[0].evolution_details[0]
+        | pokemonEvolutionDescription
+    }}
+  </div>
   }
-
-  @if (ev3 && ev3.id) {
-    @if (evolutionChain) {
-      <div class="arrow-div evo-desc">
-        <img alt="" src="assets/images/right-arrow.png" class="evo-arrow" />
-        {{
-          evolutionChain.chain.evolves_to[0].evolves_to[0].evolution_details[0]
-            | pokemonEvolutionDescription
-        }}
-      </div>
-    }
-    <div class="evo-div">
-      <img
-        class="evo-img"
-        [routerLink]="['/pokemon', ev3.id]"
-        [src]="ev3.sprites.other?.['official-artwork']?.front_default"
-        alt="ev3"
-      />
-      <div class="evo-id text-center">#{{ ev3.id }}</div>
-      <div
-        class="evo-name text-center"
-        style="padding: 0; bottom: 0"
-        [routerLink]="['/pokemon', ev3.id]"
+  <div class="evo-div">
+    <img
+      class="evo-img"
+      [routerLink]="['/pokemon', ev3.id]"
+      [src]="ev3.sprites.other?.['official-artwork']?.front_default"
+      alt="ev3"
+    />
+    <div class="evo-id text-center">#{{ ev3.id }}</div>
+    <div
+      class="evo-name text-center"
+      style="padding: 0; bottom: 0"
+      [routerLink]="['/pokemon', ev3.id]"
+    >
+      <span
+        [ngClass]="
+          'evo-name ' +
+          pokemon.pokemonSpecieResult.color.name +
+          (ev3.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
+        "
+        >{{ ev3.name | uppercase }}</span
       >
-        <span
-          [ngClass]="
-            'evo-name ' +
-            pokemon.pokemonSpecieResult.color.name +
-            (ev3.id === pokemon.pokemonResult.id ? ' selectedEvo' : '')
-          "
-          >{{ ev3.name | uppercase }}</span
-        >
-      </div>
-      <div class="flex align-content-center justify-content-center">
-        @for (type of ev3.types; track type.type.name) {
-          <div [ngClass]="'evo-icon ' + type.type.name">
-            <img
-              class=""
-              alt=""
-              src="assets/images/type-icons/png/{{ type.type.name }}.png"
-            />
-          </div>
-        }
-      </div>
     </div>
+    <div class="flex align-content-center justify-content-center">
+      @for (type of ev3.types; track type.type.name) {
+      <div [ngClass]="'evo-icon ' + type.type.name">
+        <img
+          class=""
+          alt=""
+          src="assets/images/type-icons/png/{{ type.type.name }}.png"
+        />
+      </div>
+      }
+    </div>
+  </div>
   }
 </div>
