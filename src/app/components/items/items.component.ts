@@ -7,7 +7,11 @@ import { ItemCardComponent } from '../item-card/item-card.component'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { DestroyService } from '../../services/destroy.service'
 import { TranslateModule } from '@ngx-translate/core'
-
+import { PaginatorModule, PaginatorState } from 'primeng/paginator'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
+import { InputTextModule } from 'primeng/inputtext'
+import { ItemFilterPipe } from '../../pipes/item-filter.pipe'
 @Component({
   selector: 'app-items',
   standalone: true,
@@ -18,6 +22,11 @@ import { TranslateModule } from '@ngx-translate/core'
     ItemCardComponent,
     ProgressSpinnerModule,
     TranslateModule,
+    PaginatorModule,
+    CommonModule,
+    FormsModule,
+    InputTextModule,
+    ItemFilterPipe,
   ],
   providers: [DestroyService],
 })
@@ -25,6 +34,11 @@ export class ItemsComponent implements OnInit {
   private readonly pokeApiService = inject(PokeApiService)
   page: number = 1
   items!: PokeApiResponse
+  public first: number = 0
+
+  public rows: number = 20
+
+  public ItemFilter: string = ''
 
   private destroy$ = inject(DestroyService)
 
@@ -37,18 +51,12 @@ export class ItemsComponent implements OnInit {
       })
   }
 
-  nextPage(pagination: string): void {
-    const isNext = pagination === 'next'
-    const typePagination = isNext ? this.items.next : this.items.previous
+  public onPageChange(event: PaginatorState): void {
+    this.first = event.first ? event.first : 0
+    this.rows = event.rows ? event.rows : 0
+  }
 
-    this.page = isNext ? this.page + 1 : this.page - 1
-
-    console.log(this.page)
-    this.pokeApiService
-      .getItemsPaginated(typePagination)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((itemResponse: PokeApiResponse) => {
-        this.items = itemResponse
-      })
+  public changeRow() {
+    this.first = 0
   }
 }

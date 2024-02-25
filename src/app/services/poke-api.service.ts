@@ -60,7 +60,9 @@ export class PokeApiService {
   }
 
   public getItems(): Observable<PokeApiResponse> {
-    return this.http.get<PokeApiResponse>(`${this.pokeApiUrl}/item`)
+    return this.http.get<PokeApiResponse>(
+      `${this.pokeApiUrl}/item?offset=0&limit=2000`
+    )
   }
 
   public getItem(itemUrl: string): Observable<PokeApiItemResponse> {
