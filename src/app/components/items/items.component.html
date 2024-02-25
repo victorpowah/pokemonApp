@@ -6,37 +6,43 @@
       'TOOLBAR.ITEMS' | translate | uppercase
     }}</span>
   </h1>
-  <span class="p-input-icon-right mx-2 mt-2">
+  <span class="p-input-icon-right mx-2 mt-2 p-float-label">
     <i class="pi pi-search"></i>
     <input
-      type="text"
       pInputText
+      id="searchPokemon"
+      [(ngModel)]="itemFilter"
       (ngModelChange)="changeRow()"
-      [(ngModel)]="ItemFilter"
     />
+    <label for="searchPokemon">{{ 'ITEMS.ITEM_SEARCH' | translate }}</label>
   </span>
 </div>
 
-@if(items){ @if ( items| itemFilter: ItemFilter; as items ) {
-<div
-  class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center mt-4"
->
-  @for (item of items.results | slice: first : first + rows; track item.name) {
-  <app-item-card
-    class="flex align-items-center justify-content-center"
-    [itemUrl]="item.url"
-  ></app-item-card>
+@if (items) {
+  @if (items | itemFilter: itemFilter; as items) {
+    <div
+      class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center mt-4"
+    >
+      @for (
+        item of items.results | slice: first : first + rows;
+        track item.name
+      ) {
+        <app-item-card
+          class="flex align-items-center justify-content-center"
+          [itemUrl]="item.url"
+        ></app-item-card>
+      }
+    </div>
+    <div class="flex justify-content-center">
+      <p-paginator
+        (onPageChange)="onPageChange($event)"
+        [first]="first"
+        [rows]="rows"
+        [totalRecords]="items.results.length"
+        [rowsPerPageOptions]="[10, 20, 30]"
+      ></p-paginator>
+    </div>
   }
-</div>
-<div class="flex justify-content-center">
-  <p-paginator
-    (onPageChange)="onPageChange($event)"
-    [first]="first"
-    [rows]="rows"
-    [totalRecords]="items.results.length"
-    [rowsPerPageOptions]="[10, 20, 30]"
-  ></p-paginator>
-</div>
-}} @else {
-<p-progressSpinner></p-progressSpinner>
+} @else {
+  <p-progressSpinner></p-progressSpinner>
 }

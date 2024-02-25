@@ -38,7 +38,7 @@ export class ItemsComponent implements OnInit {
 
   public rows: number = 20
 
-  public ItemFilter: string = ''
+  public itemFilter: string = ''
 
   private destroy$ = inject(DestroyService)
 
