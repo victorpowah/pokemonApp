@@ -7,13 +7,13 @@
     />
   </div>
   <div class="flex justify-content-center align-items-center mt-4">
-    <span
-      >Explore Pokémon cities with our Pokédex and assemble your own team.</span
-    >
+    <span>{{ 'POKEDEX.SPAN' | translate }}</span>
   </div>
 
   @if (pokedexs) {
-    <div class="flex justify-content-center align-items-center mt-4 mb-4">
+    <div
+      class="flex flex-wrap justify-content-center align-items-center mt-4 mb-4 gap-1"
+    >
       <p-dropdown
         [options]="pokedexs"
         [(ngModel)]="selectedPokedexDrop"
@@ -25,14 +25,17 @@
         name="selectedPokedexs"
         placeholder="Select a pokedex"
       ></p-dropdown>
-      <span class="p-input-icon-right mx-2">
+      <span class="p-input-icon-right mx-2 p-float-label">
         <i class="pi pi-search"></i>
         <input
-          type="text"
           pInputText
+          id="searchPokemon"
           [(ngModel)]="pokemonFilter"
           (ngModelChange)="changeRow()"
         />
+        <label for="searchPokemon">{{
+          'POKEDEX.POKEMON_SEARCH' | translate
+        }}</label>
       </span>
     </div>
   }
@@ -54,7 +57,7 @@
         ></app-pokemon-card>
       } @empty {
         <div>
-          <h2>No pokedex selected</h2>
+          <h2>{{ 'POKEDEX.NO_SELECTED' | translate }}</h2>
         </div>
       }
     </div>

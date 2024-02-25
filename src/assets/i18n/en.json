@@ -1,0 +1,58 @@
+{
+  "HOME": {
+    "SPAN": " 🔥 Check your favorite pokemons",
+    "TITLE_1": "The platform for",
+    "TITLE_2": "Pokemon Fans",
+    "BUTTON_START": "Get Started",
+    "TITLE_SECTION": "Easy to Use",
+    "SUBTITLE_SECTION": "You can see your favorite pokemons in detail",
+    "POKEDEX_TITLE": "Pokedex",
+    "POKEDEX_TEXT": "The Pokédex stands as an indispensable tool for Pokémon Trainers on their journey to become Pokémon Masters. Resembling a compact handheld device, it serves as a comprehensive database, cataloging information on various Pokémon species encountered throughout the world",
+    "POKEMON_DETAILS_TITLE": "Pokemon details",
+    "POKEMON_DETAILS_TEXT": "With the Pokémon Detail Description Page as your guide, you'll embark on an exciting journey of discovery, uncovering the mysteries and marvels of Pokémon species from every region. Whether you're a seasoned trainer or a curious newcomer, let the adventure begin!",
+    "ITEMS_TITLE": "Pokemon item list",
+    "ITEMS_TEXT": "Welcome to the Pokémon Item List Description Page, your comprehensive catalog of essential items found throughout the Pokémon universe. Below, you'll find descriptions of various items, categorized by their utility and purpose. Let's explore the diverse range of items available to aid trainers on their journey."
+  },
+  "POKEDEX": {
+    "SPAN": "Explore Pokémon cities with our Pokédex and assemble your own team.",
+    "NO_SELECTED": "No pokedex selected",
+    "POKEMON_SEARCH": "Pokemon name"
+  },
+  "POKEMON_DETAIL": {
+    "TRAINING": "TRAINING",
+    "EV_YIELD": "EV Yield",
+    "CATCH_RATE": "Catch Rate",
+    "BASE_FRIENDSHIP": "Base Friendship",
+    "BASE_EXP": "Base Exp.",
+    "GROWTH_RATE": "Growth Rate",
+    "HELD_ITEMS": "Held items",
+    "BREEDING": "BREEDING",
+    "EGG_GROUPS": "Egg Groups",
+    "GENDER": "Gender",
+    "EGG_CYCLES": "Egg Cycles",
+    "FORMS": "FORMS",
+    "ALTERNATIVE_FORMS": "Alternative Forms:",
+    "GENDER_DIFFERENCES": "Gender Differences:",
+    "TYPING": "TYPING",
+    "QUARTER_DAMAGE": "0.25x",
+    "HALF_DAMAGE": "0.5x",
+    "DOUBLE_DAMAGE": "2x",
+    "QUADRUPLE_DAMAGE": "4x",
+    "ID": "ID",
+    "HEIGHT": "Height",
+    "WEIGHT": "Weight",
+    "ABILITIES": "Abilities",
+    "BASE": "Base",
+    "TYPES": "Types",
+    "MIN": "Min",
+    "MAX": "Max",
+    "NO_EVOL": "This Pokémon does not evolve."
+  },
+  "TOOLBAR": {
+    "ITEMS": "Items"
+  },
+  "ITEMS": {
+    "PAGE": "Page:",
+    "ITEM_SEARCH": "Item"
+  }
+}

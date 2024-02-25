@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, inject } from '@angular/core'
 import { PokemonCatchRatePipe } from '../../pipes/pokemon-catch-rate.pipe'
 import { PokemonStatsEvPipe } from '../../pipes/pokemon-stats-ev.pipe'
 import { PokemonBaseFriendshipPipe } from '../../pipes/pokemon-base-friendship.pipe'
@@ -10,6 +10,8 @@ import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-speci
 import { CommonModule } from '@angular/common'
 import { NamedAPIResource } from '../../models/pokeApi-evolution-chain-response.model'
 import { PokeApiTypeResponse } from '../../models/pokeApi-type-response.model'
+import { ThemeService } from '../../services/theme-service.service'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-pokemon-detail-info',
@@ -22,6 +24,7 @@ import { PokeApiTypeResponse } from '../../models/pokeApi-type-response.model'
     PokemonGrowExpPipe,
     PokemonheldItemsPipe,
     PokemonGenderPipe,
+    TranslateModule,
   ],
   templateUrl: './pokemon-detail-info.component.html',
   styleUrl: './pokemon-detail-info.component.scss',
@@ -71,6 +74,8 @@ export class PokemonDetailInfoComponent {
   public from05x!: NamedAPIResource[]
   public from025x!: NamedAPIResource[]
   public from0x!: NamedAPIResource[]
+
+  public readonly themeService = inject(ThemeService)
 
   private calculateTypes(): void {
     this.from4x = this.types.type1.damage_relations.double_damage_from.filter(
