@@ -16,84 +16,90 @@
     <div class="flex align-items-center justify-content-center">
       <table>
         <tr>
-          <td class="text-right font-bold">ID</td>
+          <td class="text-right font-bold">
+            {{ 'POKEMON_DETAIL.ID' | translate }}
+          </td>
           <td>
-            #{{ pokemon.pokemonResult.id | number: '4.0-0' | replaceComma }}
+            #{{ pokemon.pokemonResult.id | number : '4.0-0' | replaceComma }}
           </td>
         </tr>
         <tr>
-          <td class="text-right font-bold">Height</td>
+          <td class="text-right font-bold">
+            {{ 'POKEMON_DETAIL.HEIGHT' | translate }}
+          </td>
           <td>
             {{ pokemon.pokemonResult.height | pokemonHeight }}
           </td>
         </tr>
         <tr>
-          <td class="text-right font-bold">Weight</td>
+          <td class="text-right font-bold">
+            {{ 'POKEMON_DETAIL.WEIGHT' | translate }}
+          </td>
           <td>
             {{ pokemon.pokemonResult.weight | pokemonWeight }}
           </td>
         </tr>
         <tr>
-          <td class="text-right font-bold">Abilities</td>
+          <td class="text-right font-bold">
+            {{ 'POKEMON_DETAIL.ABILITIES' | translate }}
+          </td>
           <td>
-            @for (
-              ability of pokemon.pokemonResult.abilities;
-              track ability.ability.name
-            ) {
-              <span
-                [ngClass]="
-                  'ability ' +
-                  pokemon.pokemonSpecieResult.color.name +
-                  (ability.is_hidden ? ' hiddenAbility' : '')
-                "
-                >{{ ability.ability.name | uppercase }}</span
-              >
+            @for ( ability of pokemon.pokemonResult.abilities; track
+            ability.ability.name ) {
+            <span
+              [ngClass]="
+                'ability ' +
+                pokemon.pokemonSpecieResult.color.name +
+                (ability.is_hidden ? ' hiddenAbility' : '')
+              "
+              >{{ ability.ability.name | uppercase }}</span
+            >
             }
           </td>
         </tr>
         <tr>
-          <td class="text-right font-bold">Types</td>
+          <td class="text-right font-bold">
+            {{ 'POKEMON_DETAIL.TYPES' | translate }}
+          </td>
           <td>
             <div class="flex flex-row flex-nowrap">
               @for (type of pokemon.pokemonResult.types; track type.type.name) {
-                <div
-                  [class]="
-                    type.type.name +
-                    ' flex icon align-items-center justify-content-start'
-                  "
-                >
-                  <span class="text-white col-8">
-                    {{ type.type.name | titlecase }}
-                  </span>
-                  <img
-                    class="col-4"
-                    alt=""
-                    src="assets/images/type-icons/png/{{ type.type.name }}.png"
-                  />
-                </div>
+              <div
+                [class]="
+                  type.type.name +
+                  ' flex icon align-items-center justify-content-start'
+                "
+              >
+                <span class="text-white col-8">
+                  {{ type.type.name | titlecase }}
+                </span>
+                <img
+                  class="col-4"
+                  alt=""
+                  src="assets/images/type-icons/png/{{ type.type.name }}.png"
+                />
+              </div>
               }
             </div>
           </td>
         </tr>
         <tr>
-          <td class="text-right font-bold">Forms</td>
+          <td class="text-right font-bold">
+            {{ 'POKEMON_DETAIL.FORMS' | translate }}
+          </td>
           <td>
             <div class="flex flex-row flex-wrap">
-              @for (
-                form of pokemon.pokemonSpecieResult.varieties;
-                track form.pokemon.name
-              ) {
-                <span
-                  [ngClass]="
-                    'flex variety mt-1 ' +
-                    pokemon.pokemonSpecieResult.color.name +
-                    (form.pokemon.url === selectedForm
-                      ? ' varietySelected'
-                      : '')
-                  "
-                  (click)="changeVarietyFn(form.pokemon.url)"
-                  >{{ form.pokemon.name | uppercase }}</span
-                >
+              @for ( form of pokemon.pokemonSpecieResult.varieties; track
+              form.pokemon.name ) {
+              <span
+                [ngClass]="
+                  'flex variety mt-1 ' +
+                  pokemon.pokemonSpecieResult.color.name +
+                  (form.pokemon.url === selectedForm ? ' varietySelected' : '')
+                "
+                (click)="changeVarietyFn(form.pokemon.url)"
+                >{{ form.pokemon.name | uppercase }}</span
+              >
               }
             </div>
           </td>
@@ -128,7 +134,7 @@
                   : null
               "
             >
-              Base
+              {{ 'POKEMON_DETAIL.BASE' | translate }}
             </button>
           </td>
           <td>
@@ -141,7 +147,7 @@
                   : null
               "
             >
-              Min
+              {{ 'POKEMON_DETAIL.MIN' | translate }}
             </button>
           </td>
           <td>
@@ -154,39 +160,37 @@
                   : null
               "
             >
-              Max
+              {{ 'POKEMON_DETAIL.MAX' | translate }}
             </button>
           </td>
         </tr>
-        @for (
-          pokemonStat of pokemon.pokemonResult.stats;
-          track pokemonStat.stat.name
-        ) {
-          <tr>
-            <td class="text-right font-bold">
-              {{ pokemonStat.stat.name | titlecase }}
-            </td>
-            <td colspan="3">
-              <app-progressbar
-                *ngIf="
-                  pokemonStat.base_stat
-                    | pokemonStats
-                      : pokemon.pokemonResult.id
-                      : selectedStat
-                      : pokemonStat.stat.name === 'hp' as stat
-                "
-                [value]="(stat / this.maxBaseStat) * 100"
-                [color]="pokemon.pokemonSpecieResult.color.name"
-                aria-valuenow=""
-                aria-valuemin="0"
-                aria-valuemax="255"
-              >
-                <ng-template pTemplate="content" let-value>
-                  <span>{{ stat }}</span>
-                </ng-template>
-              </app-progressbar>
-            </td>
-          </tr>
+        @for ( pokemonStat of pokemon.pokemonResult.stats; track
+        pokemonStat.stat.name ) {
+        <tr>
+          <td class="text-right font-bold">
+            {{ pokemonStat.stat.name | titlecase }}
+          </td>
+          <td colspan="3">
+            <app-progressbar
+              *ngIf="
+                pokemonStat.base_stat
+                  | pokemonStats
+                    : pokemon.pokemonResult.id
+                    : selectedStat
+                    : pokemonStat.stat.name === 'hp' as stat
+              "
+              [value]="(stat / this.maxBaseStat) * 100"
+              [color]="pokemon.pokemonSpecieResult.color.name"
+              aria-valuenow=""
+              aria-valuemin="0"
+              aria-valuemax="255"
+            >
+              <ng-template pTemplate="content" let-value>
+                <span>{{ stat }}</span>
+              </ng-template>
+            </app-progressbar>
+          </td>
+        </tr>
         }
       </table>
     </div>
