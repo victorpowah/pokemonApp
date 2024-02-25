@@ -15,7 +15,8 @@
   },
   "POKEDEX": {
     "SPAN": "Explore Pokémon cities with our Pokédex and assemble your own team.",
-    "NO_SELECTED": "No pokedex selected"
+    "NO_SELECTED": "No pokedex selected",
+    "POKEMON_SEARCH": "Pokemon name"
   },
   "POKEMON_DETAIL": {
     "TRAINING": "TRAINING",
@@ -51,6 +52,7 @@
     "ITEMS": "Items"
   },
   "ITEMS": {
-    "PAGE": "Page:"
+    "PAGE": "Page:",
+    "ITEM_SEARCH": "Item"
   }
 }
