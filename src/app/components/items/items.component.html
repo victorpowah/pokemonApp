@@ -1,31 +1,42 @@
-@if(items){
+<div
+  class="flex flex-wrap justify-content-center align-items-center mt-4 mb-4 gap-1"
+>
+  <h1>
+    <span class="text-6xl text-900 font-bold text-gray-900">{{
+      'TOOLBAR.ITEMS' | translate | uppercase
+    }}</span>
+  </h1>
+  <span class="p-input-icon-right mx-2 mt-2">
+    <i class="pi pi-search"></i>
+    <input
+      type="text"
+      pInputText
+      (ngModelChange)="changeRow()"
+      [(ngModel)]="ItemFilter"
+    />
+  </span>
+</div>
+
+@if(items){ @if ( items| itemFilter: ItemFilter; as items ) {
 <div
   class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center mt-4"
 >
-  @for (item of items.results; track item.name) {
+  @for (item of items.results | slice: first : first + rows; track item.name) {
   <app-item-card
     class="flex align-items-center justify-content-center"
     [itemUrl]="item.url"
   ></app-item-card>
   }
 </div>
-<div class="flex justify-content-center flex-wrap gap-2">
-  <p-button
-    class="flex align-items-center justify-content-center font-bold"
-    [disabled]="!items.previous"
-    (click)="nextPage('previous')"
-    label="Previus"
-    styleClass="bg-gray-800  border-black-alpha-70 text-white "
-  ></p-button>
-  <p>{{ 'ITEMS.PAGE' | translate }} {{ page }}</p>
-  <p-button
-    class="flex align-items-center justify-content-center font-bold border-black-alpha-70"
-    [disabled]="!items.next"
-    (click)="nextPage('next')"
-    label="Next"
-    styleClass="bg-gray-800  border-black-alpha-70 text-white  "
-  ></p-button>
+<div class="flex justify-content-center">
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="items.results.length"
+    [rowsPerPageOptions]="[10, 20, 30]"
+  ></p-paginator>
 </div>
-} @else {
+}} @else {
 <p-progressSpinner></p-progressSpinner>
 }
