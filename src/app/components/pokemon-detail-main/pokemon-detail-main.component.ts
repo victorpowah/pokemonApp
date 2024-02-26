@@ -23,10 +23,13 @@ import { PokeStatService } from '../../services/poke-stat.service'
 import { ProgressBarComponent } from '../progressbar/progressbar'
 import { ToastModule } from 'primeng/toast'
 import { TranslateModule } from '@ngx-translate/core'
+import { AbilitiesModalComponent } from '../abilities-modal/abilities-modal.component'
 
 @Component({
   selector: 'app-pokemon-detail-main',
   standalone: true,
+  templateUrl: './pokemon-detail-main.component.html',
+  styleUrl: './pokemon-detail-main.component.scss',
   imports: [
     CommonModule,
     PokemonStatsPipe,
@@ -36,9 +39,8 @@ import { TranslateModule } from '@ngx-translate/core'
     ProgressBarComponent,
     ToastModule,
     TranslateModule,
+    AbilitiesModalComponent,
   ],
-  templateUrl: './pokemon-detail-main.component.html',
-  styleUrl: './pokemon-detail-main.component.scss',
 })
 export class PokemonDetailMainComponent implements OnInit {
   private _pokemon!: {
@@ -62,6 +64,7 @@ export class PokemonDetailMainComponent implements OnInit {
   }
 
   @Output() changeVariety = new EventEmitter<string>()
+  public visible: boolean = false
 
   public pokemonGenera: string = ''
 
@@ -115,5 +118,9 @@ export class PokemonDetailMainComponent implements OnInit {
     this.maxBaseStat = 0
 
     this.changeVariety.emit(varietyUrl)
+  }
+
+  showDialog() {
+    this.visible = true
   }
 }
