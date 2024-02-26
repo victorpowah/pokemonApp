@@ -54,5 +54,8 @@
   "ITEMS": {
     "PAGE": "Page:",
     "ITEM_SEARCH": "Item"
+  },
+  "FOOTER": {
+    "DESCRIPTION": "© 2024 Pokédex, Inc. All rights reserved"
   }
 }

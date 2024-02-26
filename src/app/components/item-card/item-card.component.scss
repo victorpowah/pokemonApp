@@ -4,11 +4,9 @@
   overflow: hidden;
   width: 15rem;
   height: 30rem;
-  margin: 1rem;
 }
 
 .custom-card-header {
-  background-color: #e8e8e8db;
   padding: 1rem;
   text-align: center;
 }
@@ -21,5 +19,11 @@
 
 .custom-card-content {
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.824);
+  background-color: rgba(255, 255, 255, 0.88);
+}
+
+@media only screen and (max-width: 600px) {
+  .custom-card {
+    width: 20rem;
+  }
 }

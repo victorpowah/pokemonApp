@@ -11,6 +11,6 @@ export class PokemonItemTextPipe implements PipeTransform {
       return flavorText.language.name === 'en'
     })
 
-    return flavorText ? flavorText.text : ''
+    return flavorText ? flavorText.text : 'No information available'
   }
 }
