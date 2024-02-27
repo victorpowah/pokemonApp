@@ -2,7 +2,7 @@
   class="flex flex-column flex-wrap justify-content-center align-items-center mt-4 mb-4 gap-1"
 >
   <h1>
-    <span class="text-6xl text-900 font-bold text-gray-900">{{
+    <span class="text-6xl text-900 font-bold">{{
       'TOOLBAR.ITEMS' | translate | uppercase
     }}</span>
   </h1>
@@ -18,31 +18,29 @@
   </span>
 </div>
 
-@if (items) {
-  @if (items | itemFilter: itemFilter; as items) {
-    <div
-      class="flex flex-row flex-wrap gap-3 row-gap-3 justify-content-center mt-4"
-    >
-      @for (
-        item of items.results | slice: first : first + rows;
-        track item.name
-      ) {
-        <app-item-card
-          class="flex align-items-center justify-content-center"
-          [itemUrl]="item.url"
-        ></app-item-card>
-      }
-    </div>
-    <div class="flex justify-content-center">
-      <p-paginator
-        (onPageChange)="onPageChange($event)"
-        [first]="first"
-        [rows]="rows"
-        [totalRecords]="items.results.length"
-        [rowsPerPageOptions]="[10, 20, 30]"
-      ></p-paginator>
-    </div>
+@if (items) { @if (items | itemFilter: itemFilter; as items) {
+<div
+  class="flex flex-row flex-wrap gap-5 row-gap-5 justify-content-center mt-4 mb-4"
+>
+  @for ( item of items.results | slice: first : first + rows; track item.name )
+  {
+  <app-item-card
+    class="flex align-items-center justify-content-center"
+    [itemUrl]="item.url"
+  ></app-item-card>
   }
-} @else {
+</div>
+<div class="flex justify-content-center">
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="items.results.length"
+    [rowsPerPageOptions]="[10, 20, 30]"
+  ></p-paginator>
+</div>
+} } @else {
+<div class="mt-8 flex justify-content-center flex-wrap">
   <p-progressSpinner></p-progressSpinner>
+</div>
 }

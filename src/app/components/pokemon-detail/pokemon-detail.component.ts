@@ -18,6 +18,7 @@ import { DestroyService } from '../../services/destroy.service'
 import { PokeApiTypeResponse } from '../../models/pokeApi-type-response.model'
 import { PokemonDetailMainComponent } from '../pokemon-detail-main/pokemon-detail-main.component'
 import { PokemonDetailInfoComponent } from '../pokemon-detail-info/pokemon-detail-info.component'
+import { ProgressSpinnerModule } from 'primeng/progressspinner'
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -28,6 +29,7 @@ import { PokemonDetailInfoComponent } from '../pokemon-detail-info/pokemon-detai
     PokemonEvolveChainComponent,
     PokemonDetailMainComponent,
     PokemonDetailInfoComponent,
+    ProgressSpinnerModule,
   ],
   providers: [DestroyService],
   templateUrl: './pokemon-detail.component.html',
