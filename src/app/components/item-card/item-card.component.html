@@ -1,7 +1,7 @@
 <div class="card flex justify-content-center">
   @if (item$ | async; as item){
   <div class="custom-card shadow-5">
-    <div class="custom-card-header bg-indigo-100 hover:bg-indigo-200">
+    <div class="custom-card-header bg-indigo-50 hover:bg-indigo-100">
       @if(item.sprites.default){
       <img class="custom-card-image" alt="Card" [src]="item.sprites.default" />
       }@else {
@@ -27,7 +27,7 @@
         }
       </div>
 
-      <p class="text-gray-900">
+      <p class="">
         {{ item.flavor_text_entries | pokemonItemText }}
       </p>
     </div>

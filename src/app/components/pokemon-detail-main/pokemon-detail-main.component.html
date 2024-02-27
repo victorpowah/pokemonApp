@@ -47,6 +47,7 @@
             @for ( ability of pokemon.pokemonResult.abilities; track
             ability.ability.name ) {
             <span
+              (click)="showDialog(ability)"
               [ngClass]="
                 'ability ' +
                 pokemon.pokemonSpecieResult.color.name +
@@ -196,3 +197,10 @@
     </div>
   </div>
 </div>
+@if (abilitySelected) {
+<app-abilities-modal
+  [(visible)]="visible"
+  [ability]="abilitySelected"
+  [color]="pokemon.pokemonSpecieResult.color.name"
+></app-abilities-modal>
+}

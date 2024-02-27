@@ -57,5 +57,11 @@
   },
   "FOOTER": {
     "DESCRIPTION": "© 2024 Pokédex, Inc. All rights reserved"
+  },
+  "M_ABILITIES": {
+    "HIDDEN": "HIDDEN",
+    "EFFECT": "EFFECT",
+    "EFFECT_DEPTH": "EFFECT DEPTH",
+    "CLOSE": "Close"
   }
 }

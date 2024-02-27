@@ -1,0 +1,56 @@
+@if (ability && abilityResponse) {
+<div class="card flex justify-content-center">
+  <p-dialog
+    header="Header"
+    footer="footer"
+    (visibleChange)="changeVisibility($event)"
+    [(visible)]="visible"
+    [dismissableMask]="true"
+    [transitionOptions]="'150ms cubic-bezier(0, 0, 0.2, 1)'"
+    [style]="{ width: '30vw', height: '55vh' }"
+    [styleClass]="'shadow-4'"
+    [closable]="false"
+  >
+    <ng-template pTemplate="header">
+      <div
+        class="flex flex-column align-items-center justify-content-center w-full"
+      >
+        <h3>
+          <span>
+            {{ abilityResponse.name | uppercase }}
+          </span>
+        </h3>
+        @if(ability.is_hidden){
+        <span [ngClass]="color + ' p-1 border-round-md'">
+          {{ 'M_ABILITIES.HIDDEN' | translate }}
+        </span>
+        }
+      </div>
+    </ng-template>
+    <div
+      class="flex flex-column flex-wrap gap-3 justify-content-center align-items-center text-center"
+    >
+      <span [ngClass]="color + ' p-1 border-round-md '">
+        {{ 'M_ABILITIES.EFFECT' | translate }}</span
+      >
+
+      <span class="text-700">{{ effectString }}</span>
+      <span [ngClass]="color + ' p-1 border-round-md mt-2'">
+        {{ 'M_ABILITIES.EFFECT_DEPTH' | translate }}
+      </span>
+
+      <span class="text-700">{{ shortEffectString }}</span>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="inline-flex align-items-center justify-content-center w-full">
+        <p-button
+          styleClass="bg-gray-600  border-black-alpha-70 text-white"
+          (onClick)="closeModal()"
+          ><span> {{ 'M_ABILITIES.CLOSE' | translate }}</span></p-button
+        >
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>
+}
