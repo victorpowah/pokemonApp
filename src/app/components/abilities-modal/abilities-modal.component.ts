@@ -1,15 +1,23 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  inject,
+  input,
+} from '@angular/core'
 import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { Ability } from '../../models/pokeApi-pokemon-respose.model'
 import { PokeApiService } from '../../services/poke-api.service'
 import { PokeApiAbilityResponse } from '../../models/pokeApi-ability-response.model'
 import { CommonModule } from '@angular/common'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-abilities-modal',
   standalone: true,
-  imports: [CommonModule, DialogModule, ButtonModule],
+  imports: [CommonModule, DialogModule, ButtonModule, TranslateModule],
   templateUrl: './abilities-modal.component.html',
   styleUrl: './abilities-modal.component.scss',
 })
@@ -26,6 +34,8 @@ export class AbilitiesModalComponent {
   get ability(): Ability {
     return this._ability
   }
+
+  @Input() color: string = ''
 
   private readonly pokeApiService = inject(PokeApiService)
 
@@ -51,5 +61,10 @@ export class AbilitiesModalComponent {
           this.shortEffectString = effect?.short_effect
         }
       })
+  }
+
+  public closeModal() {
+    this.visible = false
+    this.changeVisibility(this.visible)
   }
 }
