@@ -7,6 +7,7 @@ import {
   inject,
 } from '@angular/core'
 import {
+  Ability,
   PokeApiPokemonResponse,
   Stat,
 } from '../../models/pokeApi-pokemon-respose.model'
@@ -76,6 +77,8 @@ export class PokemonDetailMainComponent implements OnInit {
 
   public maxBaseStat: number = 0
 
+  public abilitySelected: Ability | null = null
+
   private readonly pokeStatService = inject(PokeStatService)
   private destroy$ = inject(DestroyService)
 
@@ -120,7 +123,8 @@ export class PokemonDetailMainComponent implements OnInit {
     this.changeVariety.emit(varietyUrl)
   }
 
-  showDialog() {
+  showDialog(ability: Ability) {
+    this.abilitySelected = ability
     this.visible = true
   }
 }

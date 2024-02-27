@@ -8,6 +8,7 @@ import { PokeApiPokemonResponse } from '../models/pokeApi-pokemon-respose.model'
 import { PokeApiEvolutionChainResponse } from '../models/pokeApi-evolution-chain-response.model'
 import { PokeApiItemResponse } from '../models/pokeApi-item-response.model'
 import { PokeApiTypeResponse } from '../models/pokeApi-type-response.model'
+import { PokeApiAbilityResponse } from '../models/pokeApi-ability-response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -92,5 +93,9 @@ export class PokeApiService {
             no_damage_to: [],
           },
         } as unknown as PokeApiTypeResponse)
+  }
+
+  public getAbility(abilityUrl: string): Observable<PokeApiAbilityResponse> {
+    return this.http.get<PokeApiAbilityResponse>(abilityUrl)
   }
 }

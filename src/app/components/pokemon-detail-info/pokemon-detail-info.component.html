@@ -1,295 +1,291 @@
 <div class="flex justify-content-center gap-8 flex-wrap mt-5">
-  @if (themeService.getColorClass() | async; as darkMode) {
-    <div
-      class="flex flex-column align-items-center justify-content-center col-12 md:col-3 p-2 border-round-lg"
-      [ngClass]="'bg-' + pokemon.pokemonSpecieResult.color.name"
-    >
-      <h1 class="Heading text-center">
-        {{ 'POKEMON_DETAIL.TRAINING' | translate }}
-      </h1>
-      <table>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.EV_YIELD' | translate }}
-          </td>
-          <td
-            [innerHTML]="
-              {
-                stats: pokemon.pokemonResult.stats,
-                colorName: pokemon.pokemonSpecieResult.color.name
-              } | StatsEv
+  <div
+    class="flex flex-column align-items-center justify-content-center col-12 md:col-3 p-2 border-round-lg"
+    [ngClass]="'bg-' + pokemon.pokemonSpecieResult.color.name"
+  >
+    <h1 class="Heading text-center">
+      {{ 'POKEMON_DETAIL.TRAINING' | translate }}
+    </h1>
+    <table>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.EV_YIELD' | translate }}
+        </td>
+        <td
+          [innerHTML]="
+            {
+              stats: pokemon.pokemonResult.stats,
+              colorName: pokemon.pokemonSpecieResult.color.name
+            } | StatsEv
+          "
+        ></td>
+      </tr>
+      <tr>
+        <td>
+          <span class="text-right font-bold">{{
+            'POKEMON_DETAIL.CATCH_RATE' | translate
+          }}</span>
+        </td>
+        <td>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name +
+              '-text'
             "
-          ></td>
-        </tr>
-        <tr>
-          <td>
-            <span class="text-right font-bold">{{
-              'POKEMON_DETAIL.CATCH_RATE' | translate
-            }}</span>
-          </td>
-          <td>
-            <span
-              [ngClass]="
-                'text border-round-lg px-2 ' +
-                pokemon.pokemonSpecieResult.color.name +
-                '-text'
-              "
-            >
-              {{ pokemon.pokemonSpecieResult.capture_rate }}</span
-            >
+          >
+            {{ pokemon.pokemonSpecieResult.capture_rate }}</span
+          >
 
-            {{ pokemon.pokemonSpecieResult.capture_rate | catchRate }}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.BASE_FRIENDSHIP' | translate }}
-          </td>
-          <td>
-            <span
-              [ngClass]="
-                'text border-round-lg px-2 ' +
-                pokemon.pokemonSpecieResult.color.name +
-                '-text'
-              "
-            >
-              {{ pokemon.pokemonSpecieResult.base_happiness }}</span
-            >
-            {{ pokemon.pokemonSpecieResult.base_happiness | baseFriendship }}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.BASE_EXP' | translate }}
-          </td>
-          <td>
-            <span
-              [ngClass]="
-                'text border-round-lg px-2 ' +
-                pokemon.pokemonSpecieResult.color.name +
-                '-text'
-              "
-            >
-              {{ pokemon.pokemonResult.base_experience }}</span
-            >
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.GROWTH_RATE' | translate }}
-          </td>
-          <td>
-            <span
-              [ngClass]="
-                'text border-round-lg px-2 ' +
-                pokemon.pokemonSpecieResult.color.name +
-                '-text'
-              "
-              >{{
-                pokemon.pokemonSpecieResult.growth_rate.name | titlecase
-              }}</span
-            >
-            <span>
-              ({{ pokemon.pokemonSpecieResult.growth_rate.name | growExp }}
-              Exp.)
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.HELD_ITEMS' | translate }}
-          </td>
-          <td>
-            <span>
-              @if (pokemon.pokemonResult.held_items.length === 0) {
-                None
-              } @else {
-                {{ pokemon.pokemonResult.held_items | heldItems | titlecase }}
-              }
-            </span>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div
-      class="flex flex-column align-items-center justify-content-center col-12 md:col-3 p-2 border-round-lg"
-      [ngClass]="'bg-' + pokemon.pokemonSpecieResult.color.name"
-    >
-      <h1 class="Heading text-center">
-        {{ 'POKEMON_DETAIL.BREEDING' | translate }}
-      </h1>
-      <!-- Breeding -->
-      <table>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.EGG_GROUPS' | translate }}
-          </td>
-          <td>
-            @for (
-              eggGroup of pokemon.pokemonSpecieResult.egg_groups;
-              track eggGroup
-            ) {
-              <span [ngClass]="pokemon.pokemonSpecieResult.color.name + '-text'"
-                >{{ eggGroup.name | titlecase }}
-              </span>
+          {{ pokemon.pokemonSpecieResult.capture_rate | catchRate }}
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.BASE_FRIENDSHIP' | translate }}
+        </td>
+        <td>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name +
+              '-text'
+            "
+          >
+            {{ pokemon.pokemonSpecieResult.base_happiness }}</span
+          >
+          {{ pokemon.pokemonSpecieResult.base_happiness | baseFriendship }}
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.BASE_EXP' | translate }}
+        </td>
+        <td>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name +
+              '-text'
+            "
+          >
+            {{ pokemon.pokemonResult.base_experience }}</span
+          >
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.GROWTH_RATE' | translate }}
+        </td>
+        <td>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name +
+              '-text'
+            "
+            >{{
+              pokemon.pokemonSpecieResult.growth_rate.name | titlecase
+            }}</span
+          >
+          <span>
+            ({{ pokemon.pokemonSpecieResult.growth_rate.name | growExp }}
+            Exp.)
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.HELD_ITEMS' | translate }}
+        </td>
+        <td>
+          <span>
+            @if (pokemon.pokemonResult.held_items.length === 0) {
+              None
+            } @else {
+              {{ pokemon.pokemonResult.held_items | heldItems | titlecase }}
             }
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right font-bold">
-            <span>{{ 'POKEMON_DETAIL.GENDER' | translate }}</span>
-          </td>
-          <td>
-            <span
-              [innerHTML]="pokemon.pokemonSpecieResult.gender_rate | gender"
-            ></span>
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.EGG_CYCLES' | translate }}
-          </td>
-          <td>
-            <span
-              [ngClass]="
-                'text border-round-lg px-2 ' +
-                pokemon.pokemonSpecieResult.color.name +
-                '-text'
-              "
-              >{{ pokemon.pokemonSpecieResult.hatch_counter }}</span
-            >
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div
+    class="flex flex-column align-items-center justify-content-center col-12 md:col-3 p-2 border-round-lg"
+    [ngClass]="'bg-' + pokemon.pokemonSpecieResult.color.name"
+  >
+    <h1 class="Heading text-center">
+      {{ 'POKEMON_DETAIL.BREEDING' | translate }}
+    </h1>
+    <!-- Breeding -->
+    <table>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.EGG_GROUPS' | translate }}
+        </td>
+        <td>
+          @for (
+            eggGroup of pokemon.pokemonSpecieResult.egg_groups;
+            track eggGroup
+          ) {
+            <span [ngClass]="pokemon.pokemonSpecieResult.color.name + '-text'"
+              >{{ eggGroup.name | titlecase }}
+            </span>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-bold">
+          <span>{{ 'POKEMON_DETAIL.GENDER' | translate }}</span>
+        </td>
+        <td>
+          <span
+            [innerHTML]="pokemon.pokemonSpecieResult.gender_rate | gender"
+          ></span>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.EGG_CYCLES' | translate }}
+        </td>
+        <td>
+          <span
+            [ngClass]="
+              'text border-round-lg px-2 ' +
+              pokemon.pokemonSpecieResult.color.name +
+              '-text'
+            "
+            >{{ pokemon.pokemonSpecieResult.hatch_counter }}</span
+          >
 
-            {{
-              '(' + pokemon.pokemonSpecieResult.hatch_counter * 256 + ' Steps)'
-            }}
-          </td>
-        </tr>
-      </table>
-      <h1 class="Heading">{{ 'POKEMON_DETAIL.FORMS' | translate }}</h1>
-      <table>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.ALTERNATIVE_FORMS' | translate }}
-          </td>
-          <td class="">
-            {{
-              pokemon.pokemonSpecieResult.varieties.length > 1 ? 'Yes' : 'No'
-            }}
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right font-bold">
-            {{ 'POKEMON_DETAIL.GENDER_DIFFERENCES' | translate }}
-          </td>
-          <td class="">
-            {{
-              pokemon.pokemonSpecieResult.has_gender_differences ? 'Yes' : 'No'
-            }}
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div
-      class="flex flex-column align-items-center justify-content-center col-12 md:col-3 p-2 border-round-lg"
-      [ngClass]="'bg-' + pokemon.pokemonSpecieResult.color.name"
-    >
-      <!-- Typing -->
-      <h1 class="Heading">{{ 'POKEMON_DETAIL.TYPING' | translate }}</h1>
-      <table class="w-9 typingTable">
-        <tr>
-          <td class="font-bold">0x</td>
-          <td>
-            <div class="typeDefencesRow" style="padding: 0">
-              @if (from0x) {
-                @for (type of from0x; track type.name) {
-                  <div [ngClass]="'icon ' + type.name">
-                    <img
-                      alt=""
-                      src="assets/images/type-icons/png/{{ type.name }}.png"
-                    />
-                  </div>
-                }
+          {{
+            '(' + pokemon.pokemonSpecieResult.hatch_counter * 256 + ' Steps)'
+          }}
+        </td>
+      </tr>
+    </table>
+    <h1 class="Heading">{{ 'POKEMON_DETAIL.FORMS' | translate }}</h1>
+    <table>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.ALTERNATIVE_FORMS' | translate }}
+        </td>
+        <td class="">
+          {{ pokemon.pokemonSpecieResult.varieties.length > 1 ? 'Yes' : 'No' }}
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right font-bold">
+          {{ 'POKEMON_DETAIL.GENDER_DIFFERENCES' | translate }}
+        </td>
+        <td class="">
+          {{
+            pokemon.pokemonSpecieResult.has_gender_differences ? 'Yes' : 'No'
+          }}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div
+    class="flex flex-column align-items-center justify-content-center col-12 md:col-3 p-2 border-round-lg"
+    [ngClass]="'bg-' + pokemon.pokemonSpecieResult.color.name"
+  >
+    <!-- Typing -->
+    <h1 class="Heading">{{ 'POKEMON_DETAIL.TYPING' | translate }}</h1>
+    <table class="w-9 typingTable">
+      <tr>
+        <td class="font-bold">0x</td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from0x) {
+              @for (type of from0x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
               }
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="font-weight-bold">
-            {{ 'POKEMON_DETAIL.QUARTER_DAMAGE' | translate }}
-          </td>
-          <td>
-            <div class="typeDefencesRow" style="padding: 0">
-              @if (from025x) {
-                @for (type of from025x; track type.name) {
-                  <div [ngClass]="'icon ' + type.name">
-                    <img
-                      alt=""
-                      src="assets/images/type-icons/png/{{ type.name }}.png"
-                    />
-                  </div>
-                }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-weight-bold">
+          {{ 'POKEMON_DETAIL.QUARTER_DAMAGE' | translate }}
+        </td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from025x) {
+              @for (type of from025x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
               }
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="font-weight-bold">
-            {{ 'POKEMON_DETAIL.HALF_DAMAGE' | translate }}
-          </td>
-          <td>
-            <div class="typeDefencesRow" style="padding: 0">
-              @if (from05x) {
-                @for (type of from05x; track type.name) {
-                  <div [ngClass]="'icon ' + type.name">
-                    <img
-                      alt=""
-                      src="assets/images/type-icons/png/{{ type.name }}.png"
-                    />
-                  </div>
-                }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-weight-bold">
+          {{ 'POKEMON_DETAIL.HALF_DAMAGE' | translate }}
+        </td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from05x) {
+              @for (type of from05x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
               }
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="font-weight-bold">
-            {{ 'POKEMON_DETAIL.DOUBLE_DAMAGE' | translate }}
-          </td>
-          <td>
-            <div class="typeDefencesRow" style="padding: 0">
-              @if (from2x) {
-                @for (type of from2x; track type.name) {
-                  <div [ngClass]="'icon ' + type.name">
-                    <img
-                      alt=""
-                      src="assets/images/type-icons/png/{{ type.name }}.png"
-                    />
-                  </div>
-                }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-weight-bold">
+          {{ 'POKEMON_DETAIL.DOUBLE_DAMAGE' | translate }}
+        </td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from2x) {
+              @for (type of from2x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
               }
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="font-weight-bold">
-            {{ 'POKEMON_DETAIL.QUADRUPLE_DAMAGE' | translate }}
-          </td>
-          <td>
-            <div class="typeDefencesRow" style="padding: 0">
-              @if (from4x) {
-                @for (type of from4x; track type.name) {
-                  <div [ngClass]="'icon ' + type.name">
-                    <img
-                      alt=""
-                      src="assets/images/type-icons/png/{{ type.name }}.png"
-                    />
-                  </div>
-                }
+            }
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-weight-bold">
+          {{ 'POKEMON_DETAIL.QUADRUPLE_DAMAGE' | translate }}
+        </td>
+        <td>
+          <div class="typeDefencesRow" style="padding: 0">
+            @if (from4x) {
+              @for (type of from4x; track type.name) {
+                <div [ngClass]="'icon ' + type.name">
+                  <img
+                    alt=""
+                    src="assets/images/type-icons/png/{{ type.name }}.png"
+                  />
+                </div>
               }
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  }
+            }
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
