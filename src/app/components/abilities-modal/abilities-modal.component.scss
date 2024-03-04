@@ -1,0 +1,10 @@
+.modal-w {
+  width: 30% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal-w {
+    width: 100% !important;
+    padding: 1% !important;
+  }
+}

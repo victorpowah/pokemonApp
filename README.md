@@ -1,3 +1,22 @@
+# Pokédex Angular 17 Project
+
+## Overview
+This project is a comprehensive Pokédex built using Angular 17. It leverages the PokéAPI to fetch Pokémon data and utilizes RxJS for reactive programming, providing a seamless user experience.
+
+## Features
+- **Pokémon List:** View a list of Pokémon with basic information.
+- **Item Listing:** Explore a collection of items used in the Pokémon world.
+- **Detailed Pokémon View:** Access detailed information about each Pokémon, including its type, abilities, and stats.
+
+## Technologies Used
+- Angular 17
+- Angular Router
+- RxJS for reactive programming
+- [PokéAPI](https://pokeapi.co/) for Pokémon and item data
+
+## Demo
+You can try the live demo [here](https://pokemonapp-45e99.firebaseapp.com/home).
+
 # Ng17
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
