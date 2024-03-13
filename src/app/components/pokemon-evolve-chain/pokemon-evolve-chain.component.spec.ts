@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { PokemonEvolveChainComponent } from './pokemon-evolve-chain.component'
-import {
-  EvolutionChain,
-  PokeApiPokemonSpecieResponse,
-} from '/Users/alvarocebrian/Desktop/react/portfolio/pokemonApp/src/app/models/pokeApi-pokemon-specie-response.model'
 import { PokeApiEvolutionChainResponse } from '../../models/pokeApi-evolution-chain-response.model'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { PokeApiPokemonResponse } from '../../models/pokeApi-pokemon-respose.model'
+import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
 
 describe('PokemonEvolveChainComponent', () => {
   let component: PokemonEvolveChainComponent
