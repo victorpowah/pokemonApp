@@ -17,11 +17,7 @@ describe('AbilitiesModalComponent', () => {
     ])
 
     await TestBed.configureTestingModule({
-      imports: [
-        // Your module imports necessary for testing
-        AbilitiesModalComponent,
-        TranslateModule.forRoot(),
-      ],
+      imports: [AbilitiesModalComponent, TranslateModule.forRoot()],
       providers: [{ provide: PokeApiService, useValue: pokeApiServiceSpy }],
     }).compileComponents()
 

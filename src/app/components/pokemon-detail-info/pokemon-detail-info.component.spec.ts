@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { PokemonDetailInfoComponent } from './pokemon-detail-info.component'
+import { TranslateModule } from '@ngx-translate/core'
 
 describe('PokemonDetailInfoComponent', () => {
   let component: PokemonDetailInfoComponent
@@ -8,7 +9,7 @@ describe('PokemonDetailInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PokemonDetailInfoComponent],
+      imports: [PokemonDetailInfoComponent, TranslateModule.forRoot()],
     }).compileComponents()
 
     fixture = TestBed.createComponent(PokemonDetailInfoComponent)
