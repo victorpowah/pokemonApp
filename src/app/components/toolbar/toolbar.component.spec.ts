@@ -32,34 +32,37 @@ describe('ToolbarComponent', () => {
     component = fixture.componentInstance
   })
 
-  it('should create the component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should change theme and color class when toggle theme', () => {
-    component.themeSelection = false
-
-    // Simulate getColorClass returning 'light'
-    themeServiceSpy.getColorClass.and.returnValue(of('light'))
-
+  it('should toggle themeSelection and call changeTheme on themeService when changeTheme method is called', () => {
+    const initialThemeSelection = component.themeSelection
+    const expectedTheme = initialThemeSelection ? 'light' : 'dark'
     component.changeTheme()
-
-    expect(component.themeSelection).toBe(true)
-    expect(themeServiceSpy.changeTheme).toHaveBeenCalledWith('dark')
-    expect(themeServiceSpy.getColorClass).toHaveBeenCalled() // Verify that getColorClass was called
+    expect(component.themeSelection).toBe(!initialThemeSelection)
+    expect(themeServiceSpy.changeTheme).toHaveBeenCalledWith(expectedTheme)
   })
 
-  it('should set navbarFixed to false on init', () => {
-    expect(component.navbarFixed).toBe(false)
+  it('should update colorClass when themeService emits new colorClass value', () => {
+    const colorClass = 'dark-mode'
+    themeServiceSpy.getColorClass.and.returnValue(of(colorClass))
+    component.ngOnInit()
+
+    expect(component.colorClass).toBe(colorClass)
   })
 
-  it('should update navbarFixed on scroll', () => {
-    // Simulate a scroll event
-    window.scrollY = 10
-    window.dispatchEvent(new Event('scroll'))
+  describe('onScroll', () => {
+    it('should set navbarFixed to true when window scrollY is equal to or more than 1', () => {
+      spyOnProperty(window, 'scrollY').and.returnValue(1)
+      component.onScroll()
+      expect(component.navbarFixed).toBeTrue()
+    })
 
-    expect(component.navbarFixed).toBe(true)
+    it('should set navbarFixed to false when window scrollY is less than 1', () => {
+      spyOnProperty(window, 'scrollY').and.returnValue(0)
+      component.onScroll()
+      expect(component.navbarFixed).toBeFalse()
+    })
   })
-
-  // Add more tests as needed
 })

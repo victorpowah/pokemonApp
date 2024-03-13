@@ -68,18 +68,29 @@ describe('PokedexComponent', () => {
     component.changeRow()
     expect(component.rows).toBe(20)
   })
-  // it('should change pokedex', () => {
-  //   const mockPokedexResponse: PokeApiPokedexResponse = {
-  //     id: 0,
-  //     name: '',
-  //     descriptions: [],
-  //     names: [],
-  //     pokemon_entries: [],
-  //     is_main_series: false,
-  //     region: null,
-  //   }
-  //   component.selectedPokedex = mockPokedexResponse
-  //   component.changePokedex(mockPokedexResponse)
-  //   expect(component.selectedPokedex).toEqual(mockPokedexResponse)
-  // })
+  it('should set selectedPokedex to undefined if event value is falsy', () => {
+    // Arrange
+    const event = { value: null } as DropdownChangeEvent
+
+    // Act
+    component.changePokedex(event)
+
+    // Assert
+    expect(component.selectedPokedex).toBeUndefined()
+  })
+
+  it('should get and set selectedPokedex when event value is truthy', () => {
+    // Arrange
+    const event = { value: { url: 'someUrl' } } as DropdownChangeEvent
+    const mockPokedexResponse = {
+      /* mock Pokedex response */
+    } as PokeApiPokedexResponse
+    pokeApiService.getPokedex.and.returnValue(of(mockPokedexResponse))
+
+    // Act
+    component.changePokedex(event)
+
+    // Assert
+    expect(component.selectedPokedex).toEqual(mockPokedexResponse)
+  })
 })
