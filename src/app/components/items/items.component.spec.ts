@@ -53,4 +53,30 @@ describe('ItemsComponent', () => {
     component.changeRow()
     expect(component.rows).toBe(20)
   })
+
+  describe('onPageChange', () => {
+    it('should set this.first to event.first if event.first is truthy', () => {
+      const event = { first: 5, rows: 10 }
+      component.onPageChange(event)
+      expect(component.first).toEqual(5)
+    })
+
+    it('should set this.first to 0 if event.first is falsy', () => {
+      const event = { first: 0, rows: 10 }
+      component.onPageChange(event)
+      expect(component.first).toEqual(0)
+    })
+
+    it('should set this.rows to event.rows if event.rows is truthy', () => {
+      const event = { first: 5, rows: 10 }
+      component.onPageChange(event)
+      expect(component.rows).toEqual(10)
+    })
+
+    it('should set this.rows to 0 if event.rows is falsy', () => {
+      const event = { first: 5, rows: 0 }
+      component.onPageChange(event)
+      expect(component.rows).toEqual(0)
+    })
+  })
 })
