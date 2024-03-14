@@ -80,6 +80,7 @@ export class PokemonCardComponent {
     pokemonResult: PokeApiPokemonResponse,
     pokemonSpecieResult: PokeApiPokemonSpecieResponse
   ): void {
+    if (!pokemonResult || !pokemonSpecieResult) return
     this.calculatePokemonHP(pokemonResult)
     this.calculatePokemonText(pokemonSpecieResult)
   }
