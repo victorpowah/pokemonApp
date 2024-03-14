@@ -78,6 +78,10 @@ export class PokemonDetailInfoComponent {
   public readonly themeService = inject(ThemeService)
 
   private calculateTypes(): void {
+    if (!this.types?.type1 || !this.types?.type2) {
+      return
+    }
+
     this.from4x = this.types.type1.damage_relations.double_damage_from.filter(
       (type1Element: NamedAPIResource) =>
         this.types.type2.damage_relations.double_damage_from.find(

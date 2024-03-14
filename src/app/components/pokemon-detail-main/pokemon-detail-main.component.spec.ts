@@ -2,11 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { PokemonDetailMainComponent } from './pokemon-detail-main.component'
 import { DestroyService } from '../../services/destroy.service'
 import { TranslateModule } from '@ngx-translate/core'
-import { PokeApiPokemonSpecieResponse } from '../../models/pokeApi-pokemon-specie-response.model'
-import {
-  Ability,
-  PokeApiPokemonResponse,
-} from '../../models/pokeApi-pokemon-respose.model'
+import { Ability } from '../../models/pokeApi-pokemon-respose.model'
 import { SelectedStatus } from '../../models/pokemon-detail/pokemon-detail-const.model'
 
 describe('PokemonDetailMainComponent', () => {
