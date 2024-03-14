@@ -54,6 +54,9 @@ export class PokemonEvolveChainComponent {
   private destroy$ = inject(DestroyService)
 
   private getEvolutionChain(): void {
+    if (!this.pokemon?.pokemonSpecieResult || !this.pokemon?.pokemonResult)
+      return
+
     this.pokeApiService
       .getEvolutionChain(this.pokemon.pokemonSpecieResult.evolution_chain.url)
       .pipe(

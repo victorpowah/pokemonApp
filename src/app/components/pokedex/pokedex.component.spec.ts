@@ -93,4 +93,32 @@ describe('PokedexComponent', () => {
     // Assert
     expect(component.selectedPokedex).toEqual(mockPokedexResponse)
   })
+
+  it('onPageChange should update first and rows correctly when event.first is truthy', () => {
+    const event = { first: 10, rows: 20 }
+    component.onPageChange(event)
+    expect(component.first).toBe(10)
+    expect(component.rows).toBe(20)
+  })
+
+  it('onPageChange should update first and rows correctly when event.first is falsy', () => {
+    const event = { first: 0, rows: 20 }
+    component.onPageChange(event)
+    expect(component.first).toBe(0)
+    expect(component.rows).toBe(20)
+  })
+
+  it('onPageChange should update first and rows correctly when event.rows is truthy', () => {
+    const event = { first: 10, rows: 20 }
+    component.onPageChange(event)
+    expect(component.first).toBe(10)
+    expect(component.rows).toBe(20)
+  })
+
+  it('onPageChange should update first and rows correctly when event.rows is falsy', () => {
+    const event = { first: 10, rows: 0 }
+    component.onPageChange(event)
+    expect(component.first).toBe(10)
+    expect(component.rows).toBe(0)
+  })
 })

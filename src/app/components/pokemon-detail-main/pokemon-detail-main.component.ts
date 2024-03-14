@@ -54,7 +54,7 @@ export class PokemonDetailMainComponent implements OnInit {
     pokemonResult: PokeApiPokemonResponse
   }) {
     this._pokemon = pokemon
-    this.initalizePokemon()
+    this.initializePokemon()
   }
 
   get pokemon(): {
@@ -93,7 +93,9 @@ export class PokemonDetailMainComponent implements OnInit {
       })
   }
 
-  private initalizePokemon(): void {
+  private initializePokemon(): void {
+    if (!this.pokemon?.pokemonResult || !this.pokemon?.pokemonSpecieResult)
+      return
     const pokemonGeneraResult = this.pokemon.pokemonSpecieResult.genera.find(
       (genera) => genera.language.name === 'en'
     )
